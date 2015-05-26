@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{CAB3C720-2414-4DA3-B985-EE51300810D3}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="src\AvocadoTimetable.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="tst\AvocadoTimetableTests.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="tst\AvocadoTimetableEndToEndTests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="AvocadoTimetable">
+        <MSBuild Projects="src\AvocadoTimetable.dproj"/>
+    </Target>
+    <Target Name="AvocadoTimetable:Clean">
+        <MSBuild Projects="src\AvocadoTimetable.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AvocadoTimetable:Make">
+        <MSBuild Projects="src\AvocadoTimetable.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AvocadoTimetableTests">
+        <MSBuild Projects="tst\AvocadoTimetableTests.dproj"/>
+    </Target>
+    <Target Name="AvocadoTimetableTests:Clean">
+        <MSBuild Projects="tst\AvocadoTimetableTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AvocadoTimetableTests:Make">
+        <MSBuild Projects="tst\AvocadoTimetableTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AvocadoTimetableEndToEndTests">
+        <MSBuild Projects="tst\AvocadoTimetableEndToEndTests.dproj"/>
+    </Target>
+    <Target Name="AvocadoTimetableEndToEndTests:Clean">
+        <MSBuild Projects="tst\AvocadoTimetableEndToEndTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AvocadoTimetableEndToEndTests:Make">
+        <MSBuild Projects="tst\AvocadoTimetableEndToEndTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="AvocadoTimetable;AvocadoTimetableTests;AvocadoTimetableEndToEndTests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="AvocadoTimetable:Clean;AvocadoTimetableTests:Clean;AvocadoTimetableEndToEndTests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="AvocadoTimetable:Make;AvocadoTimetableTests:Make;AvocadoTimetableEndToEndTests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

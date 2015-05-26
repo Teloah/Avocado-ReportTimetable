@@ -1,0 +1,126 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  BorderStyle = bsDialog
+  Caption = 'Form1'
+  ClientHeight = 258
+  ClientWidth = 371
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -14
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 120
+  TextHeight = 17
+  object Label1: TLabel
+    Left = 56
+    Top = 31
+    Width = 38
+    Height = 17
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Firma:'
+  end
+  object Label2: TLabel
+    Left = 56
+    Top = 73
+    Width = 52
+    Height = 17
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Atskaite:'
+  end
+  object Label3: TLabel
+    Left = 56
+    Top = 119
+    Width = 60
+    Height = 17
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'S'#257'kot no:'
+  end
+  object Bevel1: TBevel
+    Left = 0
+    Top = 192
+    Width = 371
+    Height = 66
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Align = alBottom
+    Shape = bsTopLine
+  end
+  object ComboBox1: TComboBox
+    Left = 140
+    Top = 27
+    Width = 190
+    Height = 25
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    TabOrder = 0
+    Text = 'ComboBox1'
+  end
+  object ComboBox2: TComboBox
+    Left = 140
+    Top = 69
+    Width = 190
+    Height = 25
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    TabOrder = 1
+    Text = 'ComboBox2'
+  end
+  object DateTimePicker1: TDateTimePicker
+    Left = 143
+    Top = 112
+    Width = 189
+    Height = 25
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Date = 42091.843336192130000000
+    Time = 42091.843336192130000000
+    TabOrder = 2
+  end
+  object btnOK: TButton
+    Left = 128
+    Top = 208
+    Width = 98
+    Height = 33
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'OK'
+    Default = True
+    TabOrder = 3
+  end
+  object Button1: TButton
+    Left = 234
+    Top = 208
+    Width = 98
+    Height = 33
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Cancel = True
+    Caption = 'Atcelt'
+    TabOrder = 4
+  end
+end

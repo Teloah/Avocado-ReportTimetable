@@ -14,7 +14,10 @@ uses
   ApplicationRunner in 'helpers\ApplicationRunner.pas',
   NewReport in '..\src\gui\NewReport.pas' {frmNewReport},
   NewReportFormRunner in 'helpers\NewReportFormRunner.pas',
-  ConfigHelper in 'helpers\ConfigHelper.pas';
+  ConfigHelper in 'helpers\ConfigHelper.pas',
+  Reports in '..\src\model\Reports.pas',
+  ReportsConfig in '..\src\model\ReportsConfig.pas',
+  ReportTemplate in '..\src\model\ReportTemplate.pas';
 
 {$R *.RES}
 

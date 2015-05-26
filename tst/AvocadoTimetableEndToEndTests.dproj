@@ -91,6 +91,9 @@
         </DCCReference>
         <DCCReference Include="helpers\NewReportFormRunner.pas"/>
         <DCCReference Include="helpers\ConfigHelper.pas"/>
+        <DCCReference Include="..\src\model\Reports.pas"/>
+        <DCCReference Include="..\src\model\ReportsConfig.pas"/>
+        <DCCReference Include="..\src\model\ReportTemplate.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

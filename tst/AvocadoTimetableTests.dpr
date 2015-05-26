@@ -6,8 +6,7 @@ uses
   System.SysUtils,
   DUnitX.TestFramework,
   DUnitX.Loggers.Console,
-  DUnitX.Windows.Console,
-  MonthPlanCalculatorTests in 'MonthPlanCalculatorTests.pas';
+  DUnitX.Windows.Console;
 
 {$R *.RES}
 

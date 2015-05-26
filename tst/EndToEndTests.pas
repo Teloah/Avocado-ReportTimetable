@@ -92,7 +92,7 @@ begin
   NewFormRunner.ChooseMonthlyReportType();
   NewFormRunner.EnterMonthlyReportDate();
   NewFormRunner.ClickOKButton();
-
+  Assert.NotImplemented();
 end;
 
 initialization

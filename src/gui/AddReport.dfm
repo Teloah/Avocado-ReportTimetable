@@ -1,8 +1,8 @@
-object Form1: TForm1
+object frmAddReport: TfrmAddReport
   Left = 0
   Top = 0
   BorderStyle = bsDialog
-  Caption = 'Form1'
+  Caption = 'frmAddReport'
   ClientHeight = 258
   ClientWidth = 371
   Color = clBtnFace

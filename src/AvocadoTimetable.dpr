@@ -7,7 +7,7 @@ uses
   ReportsConfig in 'model\ReportsConfig.pas',
   TimetableApp in 'TimetableApp.pas',
   NewReport in 'gui\NewReport.pas' {frmNewReport},
-  AddReport in 'gui\AddReport.pas' {Form1},
+  AddReport in 'gui\AddReport.pas' {frmAddReport},
   JsonReportsConfig in 'db\JsonReportsConfig.pas',
   ReportTemplate in 'model\ReportTemplate.pas';
 
@@ -20,7 +20,6 @@ begin
   ReportMemoryLeaksOnShutdown := True;
   App := TTimetableApp.Create();
   App.Run();
-  Application.CreateForm(TForm1, Form1);
   Application.Run();
 
 end.

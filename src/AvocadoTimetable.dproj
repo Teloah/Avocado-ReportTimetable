@@ -97,7 +97,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="gui\AddReport.pas">
-            <Form>Form1</Form>
+            <Form>frmAddReport</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="db\JsonReportsConfig.pas"/>

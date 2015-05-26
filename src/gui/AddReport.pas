@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls;
 
 type
-  TForm1 = class(TForm)
+  TfrmAddReport = class(TForm)
     Label1 : TLabel;
     Label2 : TLabel;
     Label3 : TLabel;
@@ -22,9 +22,6 @@ type
   public
     { Public declarations }
   end;
-
-var
-  Form1 : TForm1;
 
 implementation
 

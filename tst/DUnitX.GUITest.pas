@@ -15,8 +15,6 @@ function FindAllForms(const aClassName : string) : ICollection<TForm>;
 
 implementation
 
-{ TGUITest }
-
 function DoFind(aParent : TComponent; const aName : string) : TControl;
 var
   aa : Integer;

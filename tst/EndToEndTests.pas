@@ -92,7 +92,8 @@ begin
   NewFormRunner.ChooseMonthlyReportType();
   NewFormRunner.EnterMonthlyReportDate();
   NewFormRunner.ClickOKButton();
-  Assert.NotImplemented();
+
+  NewFormRunner.AssertFormIsNotVisible();
 end;
 
 initialization

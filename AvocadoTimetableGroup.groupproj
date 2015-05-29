@@ -9,6 +9,9 @@
         <Projects Include="tst\AvocadoTimetableTests.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="tst\AvocadoTimetableIntegrationTests.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="tst\AvocadoTimetableEndToEndTests.dproj">
             <Dependencies/>
         </Projects>
@@ -38,6 +41,15 @@
     <Target Name="AvocadoTimetableTests:Make">
         <MSBuild Projects="tst\AvocadoTimetableTests.dproj" Targets="Make"/>
     </Target>
+    <Target Name="AvocadoTimetableIntegrationTests">
+        <MSBuild Projects="tst\AvocadoTimetableIntegrationTests.dproj"/>
+    </Target>
+    <Target Name="AvocadoTimetableIntegrationTests:Clean">
+        <MSBuild Projects="tst\AvocadoTimetableIntegrationTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AvocadoTimetableIntegrationTests:Make">
+        <MSBuild Projects="tst\AvocadoTimetableIntegrationTests.dproj" Targets="Make"/>
+    </Target>
     <Target Name="AvocadoTimetableEndToEndTests">
         <MSBuild Projects="tst\AvocadoTimetableEndToEndTests.dproj"/>
     </Target>
@@ -48,13 +60,13 @@
         <MSBuild Projects="tst\AvocadoTimetableEndToEndTests.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="AvocadoTimetable;AvocadoTimetableTests;AvocadoTimetableEndToEndTests"/>
+        <CallTarget Targets="AvocadoTimetable;AvocadoTimetableTests;AvocadoTimetableIntegrationTests;AvocadoTimetableEndToEndTests"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AvocadoTimetable:Clean;AvocadoTimetableTests:Clean;AvocadoTimetableEndToEndTests:Clean"/>
+        <CallTarget Targets="AvocadoTimetable:Clean;AvocadoTimetableTests:Clean;AvocadoTimetableIntegrationTests:Clean;AvocadoTimetableEndToEndTests:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AvocadoTimetable:Make;AvocadoTimetableTests:Make;AvocadoTimetableEndToEndTests:Make"/>
+        <CallTarget Targets="AvocadoTimetable:Make;AvocadoTimetableTests:Make;AvocadoTimetableIntegrationTests:Make;AvocadoTimetableEndToEndTests:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

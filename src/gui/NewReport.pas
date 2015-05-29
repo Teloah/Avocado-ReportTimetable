@@ -22,6 +22,7 @@ type
     btnOK : TButton;
     Button1 : TButton;
     Bevel1 : TBevel;
+    procedure btnOKClick(Sender : TObject);
   private
     { Private declarations }
   public
@@ -31,5 +32,10 @@ type
 implementation
 
 {$R *.dfm}
+
+procedure TfrmNewReport.btnOKClick(Sender : TObject);
+begin
+  Close();
+end;
 
 end.

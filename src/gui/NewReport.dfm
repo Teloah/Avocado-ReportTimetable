@@ -194,6 +194,7 @@ object frmNewReport: TfrmNewReport
     Caption = 'OK'
     Default = True
     TabOrder = 8
+    OnClick = btnOKClick
   end
   object Button1: TButton
     Left = 234

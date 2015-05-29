@@ -3,11 +3,12 @@ unit NewReportFormRunner;
 interface
 
 uses
-  Vcl.Forms, Vcl.StdCtrls, DUnitX.GUITest;
+  Vcl.Forms, Vcl.StdCtrls, DUnitX.TestFramework, DUnitX.GUITest;
 
 type
   INewReportFormRunner = interface
     ['{66777927-8F01-43EB-8AE7-CFDF4E1AA745}']
+    procedure AssertFormIsNotVisible();
     procedure ChooseMonthlyReportType();
     procedure ClickOKButton();
     procedure EnterMonthlyReportDate();
@@ -19,6 +20,7 @@ type
     Form : TForm;
   public
     constructor Create();
+    procedure AssertFormIsNotVisible();
     procedure ChooseMonthlyReportType();
     procedure ClickOKButton();
     procedure EnterMonthlyReportDate();
@@ -46,6 +48,11 @@ begin
   Form := FindForm(NEW_REPORT_FORM_CLASS);
 end;
 
+procedure TNewReportFormRunner.AssertFormIsNotVisible();
+begin
+  Assert.AreEqual(False, Form.Visible, 'Form should not be visble');
+end;
+
 procedure TNewReportFormRunner.ChooseMonthlyReportType();
 var
   lMonthlyButton : TRadioButton;
@@ -60,6 +67,7 @@ var
 begin
   lBtn := FindControl(Form, NEW_REPORT_OK_BUTTON) as TButton;
   lBtn.Click();
+  Application.ProcessMessages();
 end;
 
 procedure TNewReportFormRunner.EnterMonthlyReportDate();

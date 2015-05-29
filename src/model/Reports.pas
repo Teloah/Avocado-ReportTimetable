@@ -13,6 +13,10 @@ type
     ['{91D6E422-F054-46FC-8E1B-C6EFA7CD47BD}']
   end;
 
+  TReport = class(TInterfacedObject, IReport)
+  public
+  end;
+
   TReportEntry = record
   public
     Company : TCompany;

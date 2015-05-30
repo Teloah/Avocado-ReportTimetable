@@ -9,7 +9,8 @@ uses
   DUnitX.Windows.Console,
   JsonReportsConfigTests in 'integration\JsonReportsConfigTests.pas',
   ReportsConfig in '..\src\model\ReportsConfig.pas',
-  JsonReportsConfig in '..\src\db\JsonReportsConfig.pas';
+  JsonReportsConfig in '..\src\db\JsonReportsConfig.pas',
+  Reports in '..\src\model\Reports.pas';
 
 {$R *.RES}
 

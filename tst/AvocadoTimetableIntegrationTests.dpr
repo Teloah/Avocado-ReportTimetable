@@ -10,7 +10,8 @@ uses
   JsonReportsConfigTests in 'integration\JsonReportsConfigTests.pas',
   ReportsConfig in '..\src\model\ReportsConfig.pas',
   JsonReportsConfig in '..\src\db\JsonReportsConfig.pas',
-  Reports in '..\src\model\Reports.pas';
+  Reports in '..\src\model\Reports.pas',
+  ReportTemplate in '..\src\model\ReportTemplate.pas';
 
 {$R *.RES}
 

@@ -3,7 +3,7 @@ unit ReportsConfig;
 interface
 
 uses
-  Spring.Collections, Spring.Collections.Lists, Reports;
+  Spring.Collections, Spring.Collections.Lists, Reports, ReportTemplate;
 
 type
   TReportConfig = record
@@ -18,6 +18,7 @@ type
     ['{0569597C-D5C0-44EA-9A2D-76CD42968F0A}']
     procedure Add(aEntry : TReportConfig);
     function Entries() : ICollection<TReportConfig>;
+    procedure SaveTemplate(const aTemplate : TReportTemplate);
   end;
 
 implementation

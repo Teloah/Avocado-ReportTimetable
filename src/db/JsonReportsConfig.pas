@@ -54,8 +54,8 @@ var
   lCfg : TJSONObject;
 begin
   lCfg := TJSONObject.Create();
-  lCfg.AddPair(TJSONPair.Create(TJSONString.Create('day'), TJSONNumber.Create(aValue)));
-  FDoc.AddPair(TJSONPair.Create(TJSONString.Create('config'), lCfg));
+  lCfg.AddPair('day', TJSONNumber.Create(aValue));
+  FDoc.AddPair('config', lCfg);
 end;
 
 procedure TJSONReportTemplate.SetID(const aID : string);
@@ -75,12 +75,12 @@ end;
 
 procedure TJSONReportTemplate.AddNode(const aName : string; aValue : Integer);
 begin
-  FDoc.AddPair(TJSONPair.Create(TJSONString.Create(aName), TJSONNumber.Create(aValue)));
+  FDoc.AddPair(aName, TJSONNumber.Create(aValue));
 end;
 
 procedure TJSONReportTemplate.AddNode(const aName, aValue : string);
 begin
-  FDoc.AddPair(TJSONPair.Create(TJSONString.Create(aName), TJSONString.Create(aValue)));
+  FDoc.AddPair(aName, TJSONString.Create(aValue));
 end;
 
 function TJSONReportTemplate.AsString() : string;

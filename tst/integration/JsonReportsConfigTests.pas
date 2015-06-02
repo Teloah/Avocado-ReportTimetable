@@ -41,7 +41,8 @@ begin
   lFile := TStringList.Create();
   try
     lFile.LoadFromFile(CONFIG_NAME);
-    Assert.AreEqual('{}'#13#10, lFile.Text);
+    Assert.AreEqual( //
+      '{"class":"MONTHLY","id":"VSA","name":"Valsts Sociâlâ Atskaite","config":{"day":15}}'#13#10, lFile.Text);
   finally
     lFile.Free();
   end;

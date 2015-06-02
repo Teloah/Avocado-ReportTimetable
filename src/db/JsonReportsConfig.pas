@@ -3,7 +3,7 @@ unit JsonReportsConfig;
 interface
 
 uses
-  Classes, System.IOUtils, Spring.Collections, ReportsConfig, ReportTemplate;
+  Classes, System.JSON, System.IOUtils, Spring.Collections, ReportsConfig, ReportTemplate;
 
 type
   TJsonReportsConfig = class(TInterfacedObject, IReportsConfig)
@@ -32,16 +32,31 @@ var
   lFileName : string;
   lList : TStringList;
   lDir : string;
+  lDoc : TJSONObject;
+  lCfg : TJSONObject;
 begin
   lDir := TPath.GetHomePath() + '\Avocado\Timetable\';
   TDirectory.CreateDirectory(lDir);
   lFileName := lDir + 'Config.json';
-  lList := TStringList.Create();
+
+  lDoc := TJSONObject.Create();
   try
-    lList.Add('{}');
-    lList.SaveToFile(lFileName);
+    lDoc.AddPair(TJSONPair.Create(TJSONString.Create('class'), TJSONString.Create('MONTHLY')));
+    lDoc.AddPair(TJSONPair.Create(TJSONString.Create('id'), TJSONString.Create('VSA')));
+    lDoc.AddPair(TJSONPair.Create(TJSONString.Create('name'), TJSONString.Create('Valsts Sociâlâ Atskaite')));
+    lCfg := TJSONObject.Create();
+    lCfg.AddPair(TJSONPair.Create(TJSONString.Create('day'), TJSONNumber.Create(15)));
+    lDoc.AddPair(TJSONPair.Create(TJSONString.Create('config'), lCfg));
+
+    lList := TStringList.Create();
+    try
+      lList.Add(lDoc.ToString);
+      lList.SaveToFile(lFileName);
+    finally
+      lList.Free();
+    end;
   finally
-    lList.Free();
+    lDoc.Free();
   end;
 end;
 

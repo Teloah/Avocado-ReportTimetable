@@ -3,7 +3,8 @@ unit JsonReportsConfigTests;
 interface
 
 uses
-  System.Classes, DUnitX.TestFramework, ReportsConfig, JsonReportsConfig;
+  System.Classes, DUnitX.TestFramework, ReportsConfig, JsonReportsConfig,
+  System.IOUtils;
 
 type
 
@@ -28,9 +29,12 @@ var
   lTemplate : TReportTemplate;
   lFile : TStringList;
 const
-  CONFIG_NAME = 'C:\Users\klaipand\AppData\Roaming\Avocado\Timetable\Config.json';
+  CONFIG_DIR = '.\config';
+  CONFIG_NAME = CONFIG_DIR + '\Config.json';
 begin
-  lConfig := TJsonReportsConfig.Create();
+  TDirectory.CreateDirectory(CONFIG_DIR);
+
+  lConfig := TJsonReportsConfig.Create(CONFIG_DIR);
 
   lTemplate.ReportClass := 'MONTHLY';
   lTemplate.ID := 'VSA';

@@ -14,20 +14,20 @@ type
   public
     constructor Create();
     destructor Destroy(); override;
-    procedure SetReportClass(const aReportClass : string);
+    function AsString() : string;
+    procedure SetDay(aValue : Integer);
     procedure SetID(const aID : string);
     procedure SetName(const aName : string);
-    procedure SetDay(aValue : Integer);
-    function AsString() : string;
+    procedure SetReportClass(const aReportClass : string);
   end;
 
   TJsonReportsConfig = class(TInterfacedObject, IReportsConfig)
   private
-    function ConfigDir : string;
-    function ConfigFile : string;
-    procedure CreateConfigDirectory;
+    FConfigDir : string;
+    function ConfigFile() : string;
     procedure SaveJSONTemplateToFile(lJSON : TJSONReportTemplate);
   public
+    constructor Create(const aConfigDir : string);
     procedure Add(aEntry : TReportConfig);
     function Entries() : ICollection<TReportConfig>;
     procedure SaveTemplate(const aTemplate : TReportTemplate);
@@ -47,6 +47,21 @@ destructor TJSONReportTemplate.Destroy();
 begin
   FDoc.Free();
   inherited;
+end;
+
+procedure TJSONReportTemplate.AddNode(const aName : string; aValue : Integer);
+begin
+  FDoc.AddPair(aName, TJSONNumber.Create(aValue));
+end;
+
+procedure TJSONReportTemplate.AddNode(const aName, aValue : string);
+begin
+  FDoc.AddPair(aName, TJSONString.Create(aValue));
+end;
+
+function TJSONReportTemplate.AsString() : string;
+begin
+  Result := FDoc.ToString();
 end;
 
 procedure TJSONReportTemplate.SetDay(aValue : Integer);
@@ -73,41 +88,22 @@ begin
   AddNode('class', aReportClass);
 end;
 
-procedure TJSONReportTemplate.AddNode(const aName : string; aValue : Integer);
-begin
-  FDoc.AddPair(aName, TJSONNumber.Create(aValue));
-end;
-
-procedure TJSONReportTemplate.AddNode(const aName, aValue : string);
-begin
-  FDoc.AddPair(aName, TJSONString.Create(aValue));
-end;
-
-function TJSONReportTemplate.AsString() : string;
-begin
-  Result := FDoc.ToString();
-end;
-
 { TJsonReportsConfig }
+
+constructor TJsonReportsConfig.Create(const aConfigDir : string);
+begin
+  inherited Create();
+  FConfigDir := IncludeTrailingPathDelimiter(aConfigDir);
+end;
 
 procedure TJsonReportsConfig.Add(aEntry : TReportConfig);
 begin
 
 end;
 
-function TJsonReportsConfig.ConfigDir() : string;
-begin
-  Result := TPath.GetHomePath() + '\Avocado\Timetable\';
-end;
-
 function TJsonReportsConfig.ConfigFile() : string;
 begin
-  Result := ConfigDir() + 'Config.json';
-end;
-
-procedure TJsonReportsConfig.CreateConfigDirectory;
-begin
-  TDirectory.CreateDirectory(ConfigDir());
+  Result := FConfigDir + 'Config.json';
 end;
 
 function TJsonReportsConfig.Entries() : ICollection<TReportConfig>;
@@ -119,8 +115,6 @@ procedure TJsonReportsConfig.SaveJSONTemplateToFile(lJSON : TJSONReportTemplate)
 var
   lList : TStringList;
 begin
-  CreateConfigDirectory();
-
   lList := TStringList.Create();
   try
     lList.Add(lJSON.AsString());

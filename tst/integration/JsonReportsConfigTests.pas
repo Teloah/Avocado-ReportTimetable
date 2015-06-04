@@ -13,7 +13,7 @@ type
   private
   public
     [Test]
-    procedure Hookup();
+    procedure SaveTemplate_OneTemplate_SavesIt();
   end;
 
 implementation
@@ -23,7 +23,7 @@ uses
 
 { TJsonReportsConfigTests }
 
-procedure TJsonReportsConfigTests.Hookup();
+procedure TJsonReportsConfigTests.SaveTemplate_OneTemplate_SavesIt();
 var
   lConfig : IReportsConfig;
   lTemplate : TReportTemplate;
@@ -32,6 +32,7 @@ const
   CONFIG_DIR = '.\config';
   CONFIG_NAME = CONFIG_DIR + '\Config.json';
 begin
+  TDirectory.Delete(CONFIG_DIR, True);
   TDirectory.CreateDirectory(CONFIG_DIR);
 
   lConfig := TJsonReportsConfig.Create(CONFIG_DIR);

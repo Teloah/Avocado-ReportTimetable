@@ -28,8 +28,6 @@ type
     procedure SaveJSONTemplateToFile(lJSON : TJSONReportTemplate);
   public
     constructor Create(const aConfigDir : string);
-    procedure Add(aEntry : TReportConfig);
-    function Entries() : ICollection<TReportConfig>;
     procedure SaveTemplate(const aTemplate : TReportTemplate);
   end;
 
@@ -96,19 +94,9 @@ begin
   FConfigDir := IncludeTrailingPathDelimiter(aConfigDir);
 end;
 
-procedure TJsonReportsConfig.Add(aEntry : TReportConfig);
-begin
-
-end;
-
 function TJsonReportsConfig.ConfigFile() : string;
 begin
   Result := FConfigDir + 'Config.json';
-end;
-
-function TJsonReportsConfig.Entries() : ICollection<TReportConfig>;
-begin
-
 end;
 
 procedure TJsonReportsConfig.SaveJSONTemplateToFile(lJSON : TJSONReportTemplate);

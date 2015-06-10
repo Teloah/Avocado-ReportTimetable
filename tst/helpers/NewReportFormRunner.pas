@@ -9,22 +9,20 @@ type
   INewReportFormRunner = interface
     ['{66777927-8F01-43EB-8AE7-CFDF4E1AA745}']
     procedure AssertFormIsNotVisible();
-    procedure ChooseMonthlyReportType();
-    procedure ClickOKButton();
-    procedure EnterMonthlyReportDate();
-    procedure EnterNewReportName();
+    procedure EnterMonthlyTemplate();
   end;
 
   TNewReportFormRunner = class(TInterfacedObject, INewReportFormRunner)
   private
     Form : TForm;
-  public
-    constructor Create();
-    procedure AssertFormIsNotVisible();
     procedure ChooseMonthlyReportType();
     procedure ClickOKButton();
     procedure EnterMonthlyReportDate();
     procedure EnterNewReportName();
+  public
+    constructor Create();
+    procedure AssertFormIsNotVisible();
+    procedure EnterMonthlyTemplate();
   end;
 
 const
@@ -76,6 +74,14 @@ var
 begin
   lEdit := FindControl(Form, NEW_REPORT_MONTHLY_EDIT) as TEdit;
   lEdit.Text := NEW_REPORT_MONTHLY_VALUE_DATE;
+end;
+
+procedure TNewReportFormRunner.EnterMonthlyTemplate();
+begin
+  EnterNewReportName();
+  ChooseMonthlyReportType();
+  EnterMonthlyReportDate();
+  ClickOKButton();
 end;
 
 procedure TNewReportFormRunner.EnterNewReportName();

@@ -28,6 +28,8 @@ type
     procedure CorrectlyClosesSeveralNewReportFormsWhenClosingMainForm();
     [Test]
     procedure NewReportFormAllowsToEnterMonthlyReport();
+    [Test]
+    procedure NewMonthlyReportTemplateGetsSavedToFile();
   end;
 
 implementation
@@ -88,12 +90,20 @@ var
 begin
   App.ClickNewReportButton();
   NewFormRunner := TNewReportFormRunner.Create();
-  NewFormRunner.EnterNewReportName();
-  NewFormRunner.ChooseMonthlyReportType();
-  NewFormRunner.EnterMonthlyReportDate();
-  NewFormRunner.ClickOKButton();
+  NewFormRunner.EnterMonthlyTemplate();
 
   NewFormRunner.AssertFormIsNotVisible();
+end;
+
+procedure TEndToEndTests.NewMonthlyReportTemplateGetsSavedToFile();
+var
+  NewFormRunner : INewReportFormRunner;
+begin
+  App.ClickNewReportButton();
+  NewFormRunner := TNewReportFormRunner.Create();
+  NewFormRunner.EnterMonthlyTemplate();
+
+  ConfigHelper.AssertContainsTemplate(NEW_REPORT_VALUE_ID);
 end;
 
 initialization

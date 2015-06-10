@@ -17,7 +17,8 @@ uses
   ConfigHelper in 'helpers\ConfigHelper.pas',
   Reports in '..\src\model\Reports.pas',
   ReportsConfig in '..\src\model\ReportsConfig.pas',
-  ReportTemplate in '..\src\model\ReportTemplate.pas';
+  ReportTemplate in '..\src\model\ReportTemplate.pas',
+  JsonReportsConfig in '..\src\db\JsonReportsConfig.pas';
 
 {$R *.RES}
 

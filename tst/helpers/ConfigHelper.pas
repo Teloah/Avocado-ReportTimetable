@@ -9,7 +9,7 @@ type
   IConfigHelper = interface
     ['{E34334E6-E7FF-46A5-B97D-EB06E653A000}']
     procedure ClearConfig();
-    function Contains(aEntry : TReportConfig) : Boolean;
+    // function Contains(aEntry : TReportConfig) : Boolean;
   end;
 
   TConfigHelper = class(TInterfacedObject, IConfigHelper)
@@ -18,7 +18,6 @@ type
   public
     constructor Create();
     procedure ClearConfig();
-    function Contains(aEntry : TReportConfig) : Boolean;
   end;
 
 implementation
@@ -35,11 +34,6 @@ procedure TConfigHelper.ClearConfig();
 begin
   if TFile.Exists(FileName) then
     TFile.Delete(FileName);
-end;
-
-function TConfigHelper.Contains(aEntry : TReportConfig) : Boolean;
-begin
-  Result := False;
 end;
 
 end.

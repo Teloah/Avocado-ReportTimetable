@@ -30,7 +30,7 @@ const
   MAIN_CAPTION = 'Avocado Timetable';
   MAIN_FORM_CLASS = 'TfrmMain';
   MEMO_NAME = 'Memo1';
-  NEW_REPORT_NAME = 'tbtNewReport';
+  NEW_REPORT_NAME = 'tbtNewTemplate';
 
   { TApplicationRunner }
 

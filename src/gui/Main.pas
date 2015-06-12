@@ -11,10 +11,10 @@ type
     ToolBar1 : TToolBar;
     tbtDummy : TToolButton;
     Memo1 : TMemo;
-    tbtNewReport : TToolButton;
+    tbtNewTemplate : TToolButton;
     procedure FormDestroy(Sender : TObject);
     procedure FormCreate(Sender : TObject);
-    procedure tbtNewReportClick(Sender : TObject);
+    procedure tbtNewTemplateClick(Sender : TObject);
   private
     FForms : TObjectList<TForm>;
   public
@@ -27,7 +27,7 @@ var
 implementation
 
 uses
-  NewReport;
+  NewTemplate;
 
 {$R *.dfm}
 
@@ -41,11 +41,11 @@ begin
   FForms := TObjectList<TForm>.Create();
 end;
 
-procedure TfrmMain.tbtNewReportClick(Sender : TObject);
+procedure TfrmMain.tbtNewTemplateClick(Sender : TObject);
 var
   lForm : TForm;
 begin
-  lForm := TfrmNewReport.Create(nil);
+  lForm := TfrmNewTemplate.Create(nil);
   lForm.Show();
   FForms.Add(lForm);
 end;

@@ -85,8 +85,8 @@
         </DCCReference>
         <DCCReference Include="DUnitX.GUITest.pas"/>
         <DCCReference Include="helpers\ApplicationRunner.pas"/>
-        <DCCReference Include="..\src\gui\NewReport.pas">
-            <Form>frmNewReport</Form>
+        <DCCReference Include="..\src\gui\NewTemplate.pas">
+            <Form>frmNewTemplate</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="helpers\NewReportFormRunner.pas"/>

@@ -92,8 +92,8 @@
         <DCCReference Include="model\Reports.pas"/>
         <DCCReference Include="model\ReportsConfig.pas"/>
         <DCCReference Include="TimetableApp.pas"/>
-        <DCCReference Include="gui\NewReport.pas">
-            <Form>frmNewReport</Form>
+        <DCCReference Include="gui\NewTemplate.pas">
+            <Form>frmNewTemplate</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="gui\AddReport.pas">

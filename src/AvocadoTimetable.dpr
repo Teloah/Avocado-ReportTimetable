@@ -6,7 +6,7 @@ uses
   Reports in 'model\Reports.pas',
   ReportsConfig in 'model\ReportsConfig.pas',
   TimetableApp in 'TimetableApp.pas',
-  NewReport in 'gui\NewReport.pas' {frmNewReport},
+  NewTemplate in 'gui\NewTemplate.pas' {frmNewTemplate},
   AddReport in 'gui\AddReport.pas' {frmAddReport},
   JsonReportsConfig in 'db\JsonReportsConfig.pas',
   ReportTemplate in 'model\ReportTemplate.pas';

@@ -26,7 +26,7 @@ type
   end;
 
 const
-  NEW_REPORT_FORM_CLASS = 'TfrmNewReport';
+  NEW_REPORT_FORM_CLASS = 'TfrmNewTemplate';
   NEW_REPORT_MONTHLY_RADIO = 'rbtMonthly';
   NEW_REPORT_MONTHLY_EDIT = 'edtMonthlyDate';
   NEW_REPORT_OK_BUTTON = 'btnOK';

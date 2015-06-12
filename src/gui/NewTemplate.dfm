@@ -1,4 +1,4 @@
-object frmNewReport: TfrmNewReport
+object frmNewTemplate: TfrmNewTemplate
   Left = 0
   Top = 0
   BorderStyle = bsDialog

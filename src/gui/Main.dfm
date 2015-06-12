@@ -22,20 +22,20 @@ object frmMain: TfrmMain
     Height = 31
     AutoSize = True
     ButtonHeight = 31
-    ButtonWidth = 104
+    ButtonWidth = 118
     Caption = 'ToolBar1'
     List = True
     ShowCaptions = True
     TabOrder = 0
-    object tbtNewReport: TToolButton
+    object tbtNewTemplate: TToolButton
       Left = 0
       Top = 0
-      Caption = 'tbtNewReport'
+      Caption = 'tbtNewTemplate'
       ImageIndex = 3
-      OnClick = tbtNewReportClick
+      OnClick = tbtNewTemplateClick
     end
     object tbtDummy: TToolButton
-      Left = 104
+      Left = 118
       Top = 0
       AutoSize = True
       Caption = 'tbtDummy'

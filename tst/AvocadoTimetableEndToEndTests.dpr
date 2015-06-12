@@ -12,7 +12,7 @@ uses
   Main in '..\src\gui\Main.pas' {frmMain},
   DUnitX.GUITest in 'DUnitX.GUITest.pas',
   ApplicationRunner in 'helpers\ApplicationRunner.pas',
-  NewReport in '..\src\gui\NewReport.pas' {frmNewReport},
+  NewTemplate in '..\src\gui\NewTemplate.pas' {frmNewTemplate},
   NewReportFormRunner in 'helpers\NewReportFormRunner.pas',
   ConfigHelper in 'helpers\ConfigHelper.pas',
   Reports in '..\src\model\Reports.pas',

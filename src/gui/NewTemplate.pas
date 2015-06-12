@@ -1,4 +1,4 @@
-unit NewReport;
+unit NewTemplate;
 
 interface
 
@@ -7,7 +7,7 @@ uses
   Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, System.IOUtils;
 
 type
-  TfrmNewReport = class(TForm)
+  TfrmNewTemplate = class(TForm)
     edtReportName : TEdit;
     rbtMonthly : TRadioButton;
     edtMonthlyDate : TEdit;
@@ -34,13 +34,13 @@ uses
 
 {$R *.dfm}
 
-procedure TfrmNewReport.btnOKClick(Sender : TObject);
+procedure TfrmNewTemplate.btnOKClick(Sender : TObject);
 begin
   SaveTemplate();
   Close();
 end;
 
-procedure TfrmNewReport.SaveTemplate();
+procedure TfrmNewTemplate.SaveTemplate();
 var
   lTemplate : TReportTemplate;
   lConfig : IReportsConfig;

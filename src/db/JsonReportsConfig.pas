@@ -8,12 +8,11 @@ uses
 type
   TJSONReportTemplate = class
   private
-    FDoc : TJSONObject;
+    FRoot : TJSONObject;
     procedure AddNode(const aName : string; aValue : Integer); overload;
     procedure AddNode(const aName, aValue : string); overload;
   public
-    constructor Create();
-    destructor Destroy(); override;
+    constructor Create(aParent : TJSONArray);
     function AsString() : string;
     procedure SetDay(aValue : Integer);
     procedure SetID(const aID : string);
@@ -24,10 +23,13 @@ type
   TJsonReportsConfig = class(TInterfacedObject, IReportsConfig)
   private
     FConfigDir : string;
+    FDoc : TJSONObject;
+    FTemplates : TJSONArray;
     function ConfigFile() : string;
-    procedure SaveJSONTemplateToFile(lJSON : TJSONReportTemplate);
+    procedure SaveJSONTemplateToFile;
   public
     constructor Create(const aConfigDir : string);
+    destructor Destroy(); override;
     procedure SaveTemplate(const aTemplate : TReportTemplate);
   end;
 
@@ -35,31 +37,26 @@ implementation
 
 { TJSONReportTemplate }
 
-constructor TJSONReportTemplate.Create();
+constructor TJSONReportTemplate.Create(aParent : TJSONArray);
 begin
-  inherited;
-  FDoc := TJSONObject.Create();
-end;
-
-destructor TJSONReportTemplate.Destroy();
-begin
-  FDoc.Free();
-  inherited;
+  inherited Create();
+  FRoot := TJSONObject.Create();
+  aParent.AddElement(FRoot);
 end;
 
 procedure TJSONReportTemplate.AddNode(const aName : string; aValue : Integer);
 begin
-  FDoc.AddPair(aName, TJSONNumber.Create(aValue));
+  FRoot.AddPair(aName, TJSONNumber.Create(aValue));
 end;
 
 procedure TJSONReportTemplate.AddNode(const aName, aValue : string);
 begin
-  FDoc.AddPair(aName, TJSONString.Create(aValue));
+  FRoot.AddPair(aName, TJSONString.Create(aValue));
 end;
 
 function TJSONReportTemplate.AsString() : string;
 begin
-  Result := FDoc.ToString();
+  Result := FRoot.ToString();
 end;
 
 procedure TJSONReportTemplate.SetDay(aValue : Integer);
@@ -68,7 +65,7 @@ var
 begin
   lCfg := TJSONObject.Create();
   lCfg.AddPair('day', TJSONNumber.Create(aValue));
-  FDoc.AddPair('config', lCfg);
+  FRoot.AddPair('config', lCfg);
 end;
 
 procedure TJSONReportTemplate.SetID(const aID : string);
@@ -92,6 +89,15 @@ constructor TJsonReportsConfig.Create(const aConfigDir : string);
 begin
   inherited Create();
   FConfigDir := IncludeTrailingPathDelimiter(aConfigDir);
+  FDoc := TJSONObject.Create();
+  FTemplates := TJSONArray.Create();
+  FDoc.AddPair('templates', FTemplates);
+end;
+
+destructor TJsonReportsConfig.Destroy();
+begin
+  FDoc.Free();
+  inherited;
 end;
 
 function TJsonReportsConfig.ConfigFile() : string;
@@ -99,13 +105,13 @@ begin
   Result := FConfigDir + 'Config.json';
 end;
 
-procedure TJsonReportsConfig.SaveJSONTemplateToFile(lJSON : TJSONReportTemplate);
+procedure TJsonReportsConfig.SaveJSONTemplateToFile();
 var
   lList : TStringList;
 begin
   lList := TStringList.Create();
   try
-    lList.Add(lJSON.AsString());
+    lList.Add(FDoc.ToString());
     lList.SaveToFile(ConfigFile());
   finally
     lList.Free();
@@ -116,13 +122,13 @@ procedure TJsonReportsConfig.SaveTemplate(const aTemplate : TReportTemplate);
 var
   lJSON : TJSONReportTemplate;
 begin
-  lJSON := TJSONReportTemplate.Create();
+  lJSON := TJSONReportTemplate.Create(FTemplates);
   try
     lJSON.SetReportClass(aTemplate.ReportClass);
     lJSON.SetID(aTemplate.ID);
     lJSON.SetName(aTemplate.Name);
     lJSON.SetDay(StrToInt(aTemplate.Config));
-    SaveJSONTemplateToFile(lJSON);
+    SaveJSONTemplateToFile();
   finally
     lJSON.Free();
   end;

@@ -70,7 +70,9 @@ begin
 
   Config.SaveTemplate(lTemplate);
 
-  AssertConfigIs('{"class":"MONTHLY","id":"VSA","name":"Valsts Sociâlâ Atskaite","config":{"day":15}}'#13#10);
+  AssertConfigIs('{"templates":[' +
+    '{"class":"MONTHLY","id":"VSA","name":"Valsts Sociâlâ Atskaite","config":{"day":15}}' //
+    + ']}'#13#10);
 end;
 
 initialization

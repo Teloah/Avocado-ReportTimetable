@@ -45,7 +45,7 @@ var
   lTemplate : TReportTemplate;
   lConfig : IReportsConfig;
 begin
-  lTemplate := TReportTemplate.Create('', 'MONTHLY', 'TEST', '1');
+  lTemplate := TReportTemplate.Create('ID', 'MONTHLY', edtReportName.Text, edtMonthlyDate.Text);
   lConfig := TJsonReportsConfig.Create(TPath.GetHomePath() + '\Avocado\Timetable');
   lConfig.SaveTemplate(lTemplate);
 end;

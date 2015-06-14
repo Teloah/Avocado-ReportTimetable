@@ -35,7 +35,7 @@ type
 implementation
 
 uses
-  NewReportFormRunner;
+  NewReportFormRunner, ReportTemplate;
 
 { TEndToEndTests }
 
@@ -98,12 +98,18 @@ end;
 procedure TEndToEndTests.NewMonthlyReportTemplateGetsSavedToFile();
 var
   NewFormRunner : INewReportFormRunner;
+  lTemplate : TReportTemplate;
 begin
   App.ClickNewReportButton();
   NewFormRunner := TNewReportFormRunner.Create();
   NewFormRunner.EnterMonthlyTemplate();
 
-  ConfigHelper.AssertContainsTemplate(NEW_REPORT_VALUE_ID);
+  lTemplate.ID := 'ID';
+  lTemplate.Name := NEW_REPORT_VALUE_ID;
+  lTemplate.ReportClass := 'MONTHLY';
+  lTemplate.Config := '15';
+
+  ConfigHelper.AssertContainsTemplate(lTemplate);
 end;
 
 initialization

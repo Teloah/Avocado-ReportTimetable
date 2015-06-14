@@ -3,13 +3,13 @@ unit ConfigHelper;
 interface
 
 uses
-  System.Classes, System.SysUtils, System.IOUtils, System.JSON, DUnitX.TestFramework, ReportsConfig;
+  System.Classes, System.SysUtils, System.IOUtils, System.JSON, DUnitX.TestFramework, ReportsConfig, ReportTemplate;
 
 type
   IConfigHelper = interface
     ['{E34334E6-E7FF-46A5-B97D-EB06E653A000}']
     procedure ClearConfig();
-    procedure AssertContainsTemplate(const aTemplateName : string);
+    procedure AssertContainsTemplate(const aTemplate : TReportTemplate);
   end;
 
   TConfigHelper = class(TInterfacedObject, IConfigHelper)
@@ -18,7 +18,7 @@ type
   public
     constructor Create();
     procedure ClearConfig();
-    procedure AssertContainsTemplate(const aTemplateName : string);
+    procedure AssertContainsTemplate(const aTemplate : TReportTemplate);
   end;
 
 implementation
@@ -37,23 +37,33 @@ begin
     TFile.Delete(FileName);
 end;
 
-procedure TConfigHelper.AssertContainsTemplate(const aTemplateName : string);
+procedure TConfigHelper.AssertContainsTemplate(const aTemplate : TReportTemplate);
 var
   lCfg : TJSONObject;
   lList : TStringList;
+  lTemplates : TJSONArray;
+  lTemplate : TJSONValue;
+  lConfig : TJSONValue;
+  lStr : string;
 begin
   Assert.IsTrue(TFile.Exists(FileName), 'Config file does not exist');
 
   lList := TStringList.Create();
-  lCfg := TJSONObject.Create();
   try
     lList.LoadFromFile(FileName);
-    lCfg.Parse(BytesOf(lList.ToString()), 0);
-
-    // TODO add checking of the template
-
+    lStr := lList.Text;
+    lCfg := TJSONObject.ParseJSONValue(TEncoding.ASCII.GetBytes(lStr), 0) as TJSONObject;
+    try
+      lTemplates := lCfg.GetValue('templates') as TJSONArray;
+      lTemplate := lTemplates.Items[0];
+      Assert.AreEqual(aTemplate.Name, lTemplate.GetValue<string>('name'));
+      Assert.AreEqual(aTemplate.ReportClass, lTemplate.GetValue<string>('class'));
+      lConfig := lTemplate.GetValue<TJSONValue>('config');
+      Assert.AreEqual(aTemplate.Config, lConfig.GetValue<string>('day'));
+    finally
+      lCfg.Free();
+    end;
   finally
-    lCfg.Free();
     lList.Free();
   end;
 end;

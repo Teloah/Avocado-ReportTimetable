@@ -3,18 +3,19 @@ unit NewReportFormRunner;
 interface
 
 uses
-  Vcl.Forms, Vcl.StdCtrls, DUnitX.TestFramework, DUnitX.GUITest;
+  Vcl.Forms, Vcl.StdCtrls, DUnitX.TestFramework, DUnitX.GUITest, ReportTemplate;
 
 type
   INewReportFormRunner = interface
     ['{66777927-8F01-43EB-8AE7-CFDF4E1AA745}']
     procedure AssertFormIsNotVisible();
-    procedure EnterMonthlyTemplate();
+    procedure EnterMonthlyTemplate(const aTemplate : TReportTemplate);
   end;
 
   TNewReportFormRunner = class(TInterfacedObject, INewReportFormRunner)
   private
     Form : TForm;
+    FTemplate : TReportTemplate;
     procedure ChooseMonthlyReportType();
     procedure ClickOKButton();
     procedure EnterMonthlyReportDate();
@@ -22,7 +23,7 @@ type
   public
     constructor Create();
     procedure AssertFormIsNotVisible();
-    procedure EnterMonthlyTemplate();
+    procedure EnterMonthlyTemplate(const aTemplate : TReportTemplate);
   end;
 
 const
@@ -30,8 +31,6 @@ const
   NEW_REPORT_MONTHLY_RADIO = 'rbtMonthly';
   NEW_REPORT_MONTHLY_EDIT = 'edtMonthlyDate';
   NEW_REPORT_OK_BUTTON = 'btnOK';
-  NEW_REPORT_MONTHLY_VALUE_DATE = '15';
-  NEW_REPORT_VALUE_ID = 'REPORT_ID';
 
 implementation
 
@@ -73,11 +72,12 @@ var
   lEdit : TEdit;
 begin
   lEdit := FindControl(Form, NEW_REPORT_MONTHLY_EDIT) as TEdit;
-  lEdit.Text := NEW_REPORT_MONTHLY_VALUE_DATE;
+  lEdit.Text := FTemplate.Config;
 end;
 
-procedure TNewReportFormRunner.EnterMonthlyTemplate();
+procedure TNewReportFormRunner.EnterMonthlyTemplate(const aTemplate : TReportTemplate);
 begin
+  FTemplate := aTemplate;
   EnterNewReportName();
   ChooseMonthlyReportType();
   EnterMonthlyReportDate();
@@ -89,7 +89,7 @@ var
   lEdit : TEdit;
 begin
   lEdit := FindControl(Form, REPORT_NAME_EDIT) as TEdit;
-  lEdit.Text := NEW_REPORT_VALUE_ID;
+  lEdit.Text := FTemplate.Name;
 end;
 
 end.

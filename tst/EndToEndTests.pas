@@ -3,7 +3,7 @@ unit EndToEndTests;
 interface
 
 uses
-  DUnitX.TestFramework, DUnitX.GUITest, ApplicationRunner, ConfigHelper;
+  DUnitX.TestFramework, DUnitX.GUITest, ApplicationRunner, ConfigHelper, ReportTemplate;
 
 type
 
@@ -12,6 +12,7 @@ type
   private
     App : TApplicationRunner;
     ConfigHelper : IConfigHelper;
+    function DefaultMonthlyTemplate() : TReportTemplate;
   public
     constructor Create();
     [Setup]
@@ -35,7 +36,7 @@ type
 implementation
 
 uses
-  NewReportFormRunner, ReportTemplate;
+  NewReportFormRunner;
 
 { TEndToEndTests }
 
@@ -84,13 +85,21 @@ begin
   // there should be no memleaks from these lines
 end;
 
+function TEndToEndTests.DefaultMonthlyTemplate() : TReportTemplate;
+begin
+  Result.ID := 'ID';
+  Result.Name := 'MONTHLY REPORT';
+  Result.ReportClass := 'MONTHLY';
+  Result.Config := '15';
+end;
+
 procedure TEndToEndTests.NewReportFormAllowsToEnterMonthlyReport();
 var
   NewFormRunner : INewReportFormRunner;
 begin
   App.ClickNewReportButton();
   NewFormRunner := TNewReportFormRunner.Create();
-  NewFormRunner.EnterMonthlyTemplate();
+  NewFormRunner.EnterMonthlyTemplate(DefaultMonthlyTemplate());
 
   NewFormRunner.AssertFormIsNotVisible();
 end;
@@ -102,12 +111,9 @@ var
 begin
   App.ClickNewReportButton();
   NewFormRunner := TNewReportFormRunner.Create();
-  NewFormRunner.EnterMonthlyTemplate();
 
-  lTemplate.ID := 'ID';
-  lTemplate.Name := NEW_REPORT_VALUE_ID;
-  lTemplate.ReportClass := 'MONTHLY';
-  lTemplate.Config := '15';
+  lTemplate := DefaultMonthlyTemplate();
+  NewFormRunner.EnterMonthlyTemplate(lTemplate);
 
   ConfigHelper.AssertContainsTemplate(lTemplate);
 end;

@@ -19,6 +19,7 @@ type
     constructor Create();
     procedure ClearConfig();
     procedure AssertContainsTemplate(const aTemplate : TReportTemplate);
+    function JSONMatchesTemplate(JSONTemplate : TJSONValue; const aTemplate : TReportTemplate) : Boolean;
   end;
 
 implementation
@@ -43,7 +44,6 @@ var
   lList : TStringList;
   lTemplates : TJSONArray;
   lTemplate : TJSONValue;
-  lConfig : TJSONValue;
   lStr : string;
 begin
   Assert.IsTrue(TFile.Exists(FileName), 'Config file does not exist');
@@ -55,17 +55,31 @@ begin
     lCfg := TJSONObject.ParseJSONValue(TEncoding.ASCII.GetBytes(lStr), 0) as TJSONObject;
     try
       lTemplates := lCfg.GetValue('templates') as TJSONArray;
-      lTemplate := lTemplates.Items[0];
-      Assert.AreEqual(aTemplate.Name, lTemplate.GetValue<string>('name'));
-      Assert.AreEqual(aTemplate.ReportClass, lTemplate.GetValue<string>('class'));
-      lConfig := lTemplate.GetValue<TJSONValue>('config');
-      Assert.AreEqual(aTemplate.Config, lConfig.GetValue<string>('day'));
+
+      for lTemplate in lTemplates do begin
+        if JSONMatchesTemplate(lTemplate, aTemplate) then
+          Assert.Pass();
+      end;
+
+      Assert.Fail(Format('Template "%s" not found in config', [aTemplate.ToString()]));
     finally
       lCfg.Free();
     end;
   finally
     lList.Free();
   end;
+end;
+
+function TConfigHelper.JSONMatchesTemplate(JSONTemplate : TJSONValue; const aTemplate : TReportTemplate) : Boolean;
+var
+  lConfig : TJSONValue;
+begin
+  Result := (aTemplate.Name = JSONTemplate.GetValue<string>('name')) and
+    (aTemplate.ReportClass = JSONTemplate.GetValue<string>('class'));
+  if not Result then
+    Exit;
+  lConfig := JSONTemplate.GetValue<TJSONValue>('config');
+  Result := aTemplate.Config = lConfig.GetValue<string>('day');
 end;
 
 end.

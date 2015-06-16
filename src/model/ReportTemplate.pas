@@ -3,7 +3,7 @@ unit ReportTemplate;
 interface
 
 uses
-  Reports;
+  Reports, System.SysUtils;
 
 type
   TReportTemplate = record
@@ -12,6 +12,7 @@ type
     ReportClass : string;
     Config : string;
     constructor Create(const aID : TReportID; const aReportClass, aName, aConfig : string);
+    function ToString() : string;
   end;
 
 implementation
@@ -24,6 +25,11 @@ begin
   ReportClass := aReportClass;
   name := aName;
   Config := aConfig;
+end;
+
+function TReportTemplate.ToString() : string;
+begin
+  Result := Format('ID[%s],Name[%s],Class[%s],Config[%s]', [ID, name, ReportClass, Config]);
 end;
 
 end.

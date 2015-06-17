@@ -3,7 +3,8 @@ unit JsonReportsConfig;
 interface
 
 uses
-  Classes, System.SysUtils, System.JSON, System.IOUtils, Spring.Collections, ReportsConfig, ReportTemplate;
+  Classes, System.SysUtils, Generics.Collections, System.JSON, System.IOUtils, Spring.Collections, ReportsConfig,
+  ReportTemplate;
 
 type
   TJSONReportTemplate = class
@@ -24,9 +25,10 @@ type
   private
     FConfigDir : string;
     FDoc : TJSONObject;
+    FTemmplatesDict : TDictionary<string, TReportTemplate>;
     FTemplates : TJSONArray;
     function ConfigFile() : string;
-    procedure SaveJSONTemplateToFile;
+    procedure SaveJSONTemplateToFile();
   public
     constructor Create(const aConfigDir : string);
     destructor Destroy(); override;
@@ -89,14 +91,12 @@ constructor TJsonReportsConfig.Create(const aConfigDir : string);
 begin
   inherited Create();
   FConfigDir := IncludeTrailingPathDelimiter(aConfigDir);
-  FDoc := TJSONObject.Create();
-  FTemplates := TJSONArray.Create();
-  FDoc.AddPair('templates', FTemplates);
+  FTemmplatesDict := TDictionary<string, TReportTemplate>.Create();
 end;
 
 destructor TJsonReportsConfig.Destroy();
 begin
-  FDoc.Free();
+  FTemmplatesDict.Free();
   inherited;
 end;
 
@@ -121,16 +121,27 @@ end;
 procedure TJsonReportsConfig.SaveTemplate(const aTemplate : TReportTemplate);
 var
   lJSON : TJSONReportTemplate;
+  lTemplate : TReportTemplate;
 begin
-  lJSON := TJSONReportTemplate.Create(FTemplates);
+  FTemmplatesDict.Add(aTemplate.Name, aTemplate);
+  FDoc := TJSONObject.Create();
   try
-    lJSON.SetReportClass(aTemplate.ReportClass);
-    lJSON.SetID(aTemplate.ID);
-    lJSON.SetName(aTemplate.Name);
-    lJSON.SetDay(StrToInt(aTemplate.Config));
+    FTemplates := TJSONArray.Create();
+    FDoc.AddPair('templates', FTemplates);
+    for lTemplate in FTemmplatesDict.Values do begin
+      lJSON := TJSONReportTemplate.Create(FTemplates);
+      try
+        lJSON.SetReportClass(lTemplate.ReportClass);
+        lJSON.SetID(lTemplate.ID);
+        lJSON.SetName(lTemplate.Name);
+        lJSON.SetDay(StrToInt(lTemplate.Config));
+      finally
+        lJSON.Free();
+      end;
+    end;
     SaveJSONTemplateToFile();
   finally
-    lJSON.Free();
+    FDoc.Free();
   end;
 end;
 

@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls,
-  Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, System.IOUtils;
+  Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, ReportsConfig;
 
 type
   TfrmNewTemplate = class(TForm)
@@ -23,14 +23,17 @@ type
     Button1 : TButton;
     Bevel1 : TBevel;
     procedure btnOKClick(Sender : TObject);
+  private
+    FConfig : IReportsConfig;
   public
     procedure SaveTemplate();
+    property Config : IReportsConfig read FConfig write FConfig;
   end;
 
 implementation
 
 uses
-  ReportsConfig, JsonReportsConfig, ReportTemplate;
+  JsonReportsConfig, ReportTemplate;
 
 {$R *.dfm}
 
@@ -43,11 +46,9 @@ end;
 procedure TfrmNewTemplate.SaveTemplate();
 var
   lTemplate : TReportTemplate;
-  lConfig : IReportsConfig;
 begin
   lTemplate := TReportTemplate.Create('ID', 'MONTHLY', edtReportName.Text, edtMonthlyDate.Text);
-  lConfig := TJsonReportsConfig.Create(TPath.GetHomePath() + '\Avocado\Timetable');
-  lConfig.SaveTemplate(lTemplate);
+  FConfig.SaveTemplate(lTemplate);
 end;
 
 end.

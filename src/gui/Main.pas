@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls,
-  Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ToolWin, Vcl.StdCtrls, Generics.Collections;
+  Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ToolWin, Vcl.StdCtrls, System.IOUtils, Generics.Collections, ReportsConfig;
 
 type
   TfrmMain = class(TForm)
@@ -17,6 +17,7 @@ type
     procedure tbtNewTemplateClick(Sender : TObject);
   private
     FForms : TObjectList<TForm>;
+    FConfig : IReportsConfig;
   public
     { Public declarations }
   end;
@@ -27,7 +28,7 @@ var
 implementation
 
 uses
-  NewTemplate;
+  NewTemplate, JsonReportsConfig;
 
 {$R *.dfm}
 
@@ -39,13 +40,15 @@ end;
 procedure TfrmMain.FormCreate(Sender : TObject);
 begin
   FForms := TObjectList<TForm>.Create();
+  FConfig := TJsonReportsConfig.Create(TPath.GetHomePath() + '\Avocado\Timetable');
 end;
 
 procedure TfrmMain.tbtNewTemplateClick(Sender : TObject);
 var
-  lForm : TForm;
+  lForm : TfrmNewTemplate;
 begin
   lForm := TfrmNewTemplate.Create(nil);
+  lForm.Config := FConfig;
   lForm.Show();
   FForms.Add(lForm);
 end;

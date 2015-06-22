@@ -33,6 +33,8 @@ type
     procedure NewMonthlyReportTemplateGetsSavedToFile();
     [Test]
     procedure NewMonthlyReportTemplateGetsAddedToExistingTemplates();
+    [Test]
+    procedure TemplatesArePersistedBetweenSessions();
   end;
 
 implementation
@@ -131,6 +133,33 @@ begin
 
   lTemplate := DefaultMonthlyTemplate();
   NewFormRunner.EnterMonthlyTemplate(lTemplate);
+
+  App.ClickNewReportButton();
+  NewFormRunner := TNewReportFormRunner.Create();
+
+  lTemplate2.ID := 'ID2';
+  lTemplate2.Name := 'Other monthly report';
+  lTemplate2.ReportClass := 'MONTHLY';
+  lTemplate2.Config := '1';
+  NewFormRunner.EnterMonthlyTemplate(lTemplate2);
+
+  ConfigHelper.AssertContainsTemplate(lTemplate);
+end;
+
+procedure TEndToEndTests.TemplatesArePersistedBetweenSessions;
+var
+  NewFormRunner : INewReportFormRunner;
+  lTemplate : TReportTemplate;
+  lTemplate2 : TReportTemplate;
+begin
+  App.ClickNewReportButton();
+  NewFormRunner := TNewReportFormRunner.Create();
+
+  lTemplate := DefaultMonthlyTemplate();
+  NewFormRunner.EnterMonthlyTemplate(lTemplate);
+
+  App.Free();
+  App := TApplicationRunner.Create();
 
   App.ClickNewReportButton();
   NewFormRunner := TNewReportFormRunner.Create();

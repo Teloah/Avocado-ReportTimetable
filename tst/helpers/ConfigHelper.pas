@@ -16,7 +16,7 @@ type
   private
     FileName : string;
   public
-    constructor Create();
+    constructor Create(const aConfigFileName : string);
     procedure ClearConfig();
     procedure AssertContainsTemplate(const aTemplate : TReportTemplate);
     function JSONMatchesTemplate(JSONTemplate : TJSONValue; const aTemplate : TReportTemplate) : Boolean;
@@ -26,10 +26,10 @@ implementation
 
 { TConfigHelper }
 
-constructor TConfigHelper.Create();
+constructor TConfigHelper.Create(const aConfigFileName : string);
 begin
-  inherited;
-  FileName := TPath.GetHomePath() + '\Avocado\Timetable\Config.json';
+  inherited Create();
+  FileName := aConfigFileName;
 end;
 
 procedure TConfigHelper.ClearConfig();
@@ -52,7 +52,7 @@ begin
   try
     lList.LoadFromFile(FileName);
     lStr := lList.Text;
-    lCfg := TJSONObject.ParseJSONValue(TEncoding.ASCII.GetBytes(lStr), 0) as TJSONObject;
+    lCfg := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(lStr), 0) as TJSONObject;
     try
       lTemplates := lCfg.GetValue('templates') as TJSONArray;
 
@@ -61,7 +61,7 @@ begin
           Assert.Pass();
       end;
 
-      Assert.Fail(Format('Template "%s" not found in config', [aTemplate.ToString()]));
+      Assert.Fail(Format('Template "%s" not found in config: [%s]', [aTemplate.ToString(), lStr]));
     finally
       lCfg.Free();
     end;
@@ -73,9 +73,12 @@ end;
 function TConfigHelper.JSONMatchesTemplate(JSONTemplate : TJSONValue; const aTemplate : TReportTemplate) : Boolean;
 var
   lConfig : TJSONValue;
+  lClass : string;
+  lName : string;
 begin
-  Result := (aTemplate.Name = JSONTemplate.GetValue<string>('name')) and
-    (aTemplate.ReportClass = JSONTemplate.GetValue<string>('class'));
+  lClass := JSONTemplate.GetValue<string>('class');
+  lName := JSONTemplate.GetValue<string>('name');
+  Result := (aTemplate.Name = lName) and (aTemplate.ReportClass = lClass);
   if not Result then
     Exit;
   lConfig := JSONTemplate.GetValue<TJSONValue>('config');

@@ -3,7 +3,7 @@ unit EndToEndTests;
 interface
 
 uses
-  DUnitX.TestFramework, DUnitX.GUITest, ApplicationRunner, ConfigHelper, ReportTemplate;
+  System.IOUtils, DUnitX.TestFramework, DUnitX.GUITest, ApplicationRunner, ConfigHelper, ReportTemplate;
 
 type
 
@@ -15,6 +15,7 @@ type
     function DefaultMonthlyTemplate() : TReportTemplate;
   public
     constructor Create();
+    function ConfigFileName : string;
     [Setup]
     procedure Setup();
     [TearDown]
@@ -47,7 +48,12 @@ uses
 constructor TEndToEndTests.Create();
 begin
   inherited;
-  ConfigHelper := TConfigHelper.Create();
+  ConfigHelper := TConfigHelper.Create(ConfigFileName());
+end;
+
+function TEndToEndTests.ConfigFileName() : string;
+begin
+  Result := TPath.GetHomePath() + '\Avocado\Timetable\Config.json';
 end;
 
 procedure TEndToEndTests.Setup();

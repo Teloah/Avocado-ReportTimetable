@@ -3,7 +3,7 @@ unit JsonReportsConfigTests;
 interface
 
 uses
-  System.Classes, System.IOUtils, DUnitX.TestFramework, ReportsConfig, JsonReportsConfig;
+  System.Classes, System.SysUtils, System.IOUtils, DUnitX.TestFramework, ReportsConfig, JsonReportsConfig, ConfigHelper;
 
 type
 
@@ -11,7 +11,7 @@ type
   TJsonReportsConfigTests = class
   private
     Config : IReportsConfig;
-    procedure AssertConfigIs(const aConfigString : string);
+    ConfigHelper : IConfigHelper;
     function CreateConfig() : IReportsConfig;
     procedure RecreateConfigDir();
   public
@@ -35,19 +35,7 @@ const
 procedure TJsonReportsConfigTests.Setup();
 begin
   RecreateConfigDir();
-end;
-
-procedure TJsonReportsConfigTests.AssertConfigIs(const aConfigString : string);
-var
-  lFile : TStringList;
-begin
-  lFile := TStringList.Create();
-  try
-    lFile.LoadFromFile(CONFIG_NAME);
-    Assert.AreEqual(aConfigString, lFile.Text);
-  finally
-    lFile.Free();
-  end;
+  ConfigHelper := TConfigHelper.Create(CONFIG_NAME);
 end;
 
 function TJsonReportsConfigTests.CreateConfig() : IReportsConfig;
@@ -57,7 +45,8 @@ end;
 
 procedure TJsonReportsConfigTests.RecreateConfigDir();
 begin
-  TDirectory.Delete(CONFIG_DIR, True);
+  if TDirectory.Exists(CONFIG_DIR) then
+    TDirectory.Delete(CONFIG_DIR, True);
   TDirectory.CreateDirectory(CONFIG_DIR);
 end;
 
@@ -70,9 +59,11 @@ begin
 
   Config.SaveTemplate(lTemplate);
 
-  AssertConfigIs('{"templates":[' +
-    '{"class":"MONTHLY","id":"VSA","name":"Valsts Sociâlâ Atskaite","config":{"day":15}}' //
-    + ']}'#13#10);
+  ConfigHelper.AssertContainsTemplate(lTemplate);
+
+  // AssertConfigIs('{"templates":[' +
+  // '{"class":"MONTHLY","id":"VSA","name":"Valsts Sociâlâ Atskaite","config":{"day":15}}' //
+  // + ']}'#13#10);
 end;
 
 initialization

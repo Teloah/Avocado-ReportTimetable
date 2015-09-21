@@ -6,7 +6,8 @@ uses
   System.SysUtils,
   DUnitX.TestFramework,
   DUnitX.Loggers.Console,
-  DUnitX.Windows.Console;
+  DUnitX.Windows.Console,
+  ReportTemplate in '..\src\model\ReportTemplate.pas';
 
 {$R *.RES}
 

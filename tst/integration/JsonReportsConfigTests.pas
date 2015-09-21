@@ -19,6 +19,8 @@ type
     procedure Setup();
     [Test]
     procedure SaveTemplate_OneTemplate_SavesIt();
+    [Test]
+    procedure LoadTemplate_SavedTemplate_LoadsIt();
   end;
 
 implementation
@@ -60,10 +62,21 @@ begin
   Config.SaveTemplate(lTemplate);
 
   ConfigHelper.AssertContainsTemplate(lTemplate);
+end;
 
-  // AssertConfigIs('{"templates":[' +
-  // '{"class":"MONTHLY","id":"VSA","name":"Valsts Sociâlâ Atskaite","config":{"day":15}}' //
-  // + ']}'#13#10);
+procedure TJsonReportsConfigTests.LoadTemplate_SavedTemplate_LoadsIt;
+var
+  lTemplate : TReportTemplate;
+  lOtherTemplate : TReportTemplate;
+begin
+  lTemplate := TReportTemplate.Create('VSA', 'MONTHLY', 'Valsts Sociâlâ Atskaite', '15');
+  Config := CreateConfig();
+  Config.SaveTemplate(lTemplate);
+
+  Config := CreateConfig();
+  lOtherTemplate := Config.LoadTemplate('VSA');
+
+  Assert.AreEqual(lTemplate.ToString, lOtherTemplate.ToString);
 end;
 
 initialization

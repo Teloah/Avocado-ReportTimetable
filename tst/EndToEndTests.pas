@@ -152,7 +152,7 @@ begin
   ConfigHelper.AssertContainsTemplate(lTemplate);
 end;
 
-procedure TEndToEndTests.TemplatesArePersistedBetweenSessions;
+procedure TEndToEndTests.TemplatesArePersistedBetweenSessions();
 var
   NewFormRunner : INewReportFormRunner;
   lTemplate : TReportTemplate;

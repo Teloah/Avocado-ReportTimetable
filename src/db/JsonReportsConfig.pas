@@ -32,6 +32,7 @@ type
   public
     constructor Create(const aConfigDir : string);
     destructor Destroy(); override;
+    function LoadTemplate(const aID : string) : TReportTemplate;
     procedure SaveTemplate(const aTemplate : TReportTemplate);
   end;
 
@@ -98,6 +99,21 @@ destructor TJsonReportsConfig.Destroy();
 begin
   FTemmplatesDict.Free();
   inherited;
+end;
+
+function TJsonReportsConfig.LoadTemplate(const aID : string) : TReportTemplate;
+var
+  lJSONObj : TJSONValue;
+  lValue : string;
+begin
+  Result.ID := aID;
+  lValue := TFile.ReadAllText(ConfigFile());
+  lJSONObj := TJSONObject.ParseJSONValue(lValue);
+  try
+    WriteLn(lJSONObj.ToString);
+  finally
+    lJSONObj.Free();
+  end;
 end;
 
 function TJsonReportsConfig.ConfigFile() : string;

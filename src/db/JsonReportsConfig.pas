@@ -104,6 +104,8 @@ end;
 function TJsonReportsConfig.LoadTemplate(const aID : string) : TReportTemplate;
 var
   lJSONObj : TJSONValue;
+  lEntries : TJSONArray;
+  lEntry : TJSONValue;
   lValue : string;
 begin
   Result.ID := aID;
@@ -111,6 +113,12 @@ begin
   lJSONObj := TJSONObject.ParseJSONValue(lValue);
   try
     WriteLn(lJSONObj.ToString);
+    lEntries := lJSONObj.GetValue<TJSONArray>('templates');
+    lEntry := lEntries.Items[0];
+    Result.ID := lEntry.GetValue<string>('id');
+    Result.Name := lEntry.GetValue<string>('name');
+    Result.ReportClass := lEntry.GetValue<string>('class');
+    Result.Config := lEntry.GetValue<TJSONValue>('config').GetValue<string>('day');
   finally
     lJSONObj.Free();
   end;

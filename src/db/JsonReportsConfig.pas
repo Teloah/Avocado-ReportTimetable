@@ -112,13 +112,16 @@ begin
   lValue := TFile.ReadAllText(ConfigFile());
   lJSONObj := TJSONObject.ParseJSONValue(lValue);
   try
-    WriteLn(lJSONObj.ToString);
     lEntries := lJSONObj.GetValue<TJSONArray>('templates');
-    lEntry := lEntries.Items[0];
-    Result.ID := lEntry.GetValue<string>('id');
-    Result.Name := lEntry.GetValue<string>('name');
-    Result.ReportClass := lEntry.GetValue<string>('class');
-    Result.Config := lEntry.GetValue<TJSONValue>('config').GetValue<string>('day');
+    for lEntry in lEntries do begin
+      if lEntry.GetValue<string>('id') <> aID then
+        Continue;
+      Result.ID := lEntry.GetValue<string>('id');
+      Result.Name := lEntry.GetValue<string>('name');
+      Result.ReportClass := lEntry.GetValue<string>('class');
+      Result.Config := lEntry.GetValue<TJSONValue>('config').GetValue<string>('day');
+      Exit;
+    end;
   finally
     lJSONObj.Free();
   end;

@@ -21,6 +21,8 @@ type
     procedure SaveTemplate_OneTemplate_SavesIt();
     [Test]
     procedure LoadTemplate_SavedTemplate_LoadsIt();
+    [Test]
+    procedure LoadTemplate_SeveralTemplates_LoadsSecondOne();
   end;
 
 implementation
@@ -64,13 +66,29 @@ begin
   ConfigHelper.AssertContainsTemplate(lTemplate);
 end;
 
-procedure TJsonReportsConfigTests.LoadTemplate_SavedTemplate_LoadsIt;
+procedure TJsonReportsConfigTests.LoadTemplate_SavedTemplate_LoadsIt();
 var
   lTemplate : TReportTemplate;
   lOtherTemplate : TReportTemplate;
 begin
   lTemplate := TReportTemplate.Create('VSA', 'MONTHLY', 'Valsts Sociâlâ Atskaite', '15');
   Config := CreateConfig();
+  Config.SaveTemplate(lTemplate);
+
+  Config := CreateConfig();
+  lOtherTemplate := Config.LoadTemplate('VSA');
+
+  Assert.AreEqual(lTemplate.ToString, lOtherTemplate.ToString);
+end;
+
+procedure TJsonReportsConfigTests.LoadTemplate_SeveralTemplates_LoadsSecondOne();
+var
+  lTemplate : TReportTemplate;
+  lOtherTemplate : TReportTemplate;
+begin
+  lTemplate := TReportTemplate.Create('VSA', 'MONTHLY', 'Valsts Sociâlâ Atskaite', '15');
+  Config := CreateConfig();
+  Config.SaveTemplate(TReportTemplate.Create('DUMMY', 'MONTHLY', 'Pirmâ Atskaite', '1'));
   Config.SaveTemplate(lTemplate);
 
   Config := CreateConfig();

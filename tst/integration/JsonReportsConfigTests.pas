@@ -23,6 +23,8 @@ type
     procedure LoadTemplate_SavedTemplate_LoadsIt();
     [Test]
     procedure LoadTemplate_SeveralTemplates_LoadsSecondOne();
+    [Test]
+    procedure LoadTemplate_TemplateFromAnotherSession_LoadsTemplate();
   end;
 
 implementation
@@ -92,6 +94,22 @@ begin
   Config.SaveTemplate(lTemplate);
 
   Config := CreateConfig();
+  lOtherTemplate := Config.LoadTemplate('VSA');
+
+  Assert.AreEqual(lTemplate.ToString, lOtherTemplate.ToString);
+end;
+
+procedure TJsonReportsConfigTests.LoadTemplate_TemplateFromAnotherSession_LoadsTemplate();
+var
+  lTemplate : TReportTemplate;
+  lOtherTemplate : TReportTemplate;
+begin
+  lTemplate := TReportTemplate.Create('VSA', 'MONTHLY', 'Valsts Sociâlâ Atskaite', '15');
+  Config := CreateConfig();
+  Config.SaveTemplate(lTemplate);
+
+  Config := CreateConfig();
+  Config.SaveTemplate(TReportTemplate.Create('DUMMY', 'MONTHLY', 'Pirmâ Atskaite', '1'));
   lOtherTemplate := Config.LoadTemplate('VSA');
 
   Assert.AreEqual(lTemplate.ToString, lOtherTemplate.ToString);

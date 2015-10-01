@@ -27,7 +27,9 @@ type
     FDoc : TJSONObject;
     FTemmplatesDict : TDictionary<string, TReportTemplate>;
     FTemplates : TJSONArray;
+    TemplatesLoaded : Boolean;
     function ConfigFile() : string;
+    procedure LoadTemplates();
     procedure SaveJSONTemplateToFile();
   public
     constructor Create(const aConfigDir : string);
@@ -102,34 +104,45 @@ begin
 end;
 
 function TJsonReportsConfig.LoadTemplate(const aID : string) : TReportTemplate;
-var
-  lJSONObj : TJSONValue;
-  lEntries : TJSONArray;
-  lEntry : TJSONValue;
-  lValue : string;
 begin
-  Result.ID := aID;
-  lValue := TFile.ReadAllText(ConfigFile());
-  lJSONObj := TJSONObject.ParseJSONValue(lValue);
-  try
-    lEntries := lJSONObj.GetValue<TJSONArray>('templates');
-    for lEntry in lEntries do begin
-      if lEntry.GetValue<string>('id') <> aID then
-        Continue;
-      Result.ID := lEntry.GetValue<string>('id');
-      Result.Name := lEntry.GetValue<string>('name');
-      Result.ReportClass := lEntry.GetValue<string>('class');
-      Result.Config := lEntry.GetValue<TJSONValue>('config').GetValue<string>('day');
-      Exit;
-    end;
-  finally
-    lJSONObj.Free();
-  end;
+  if not TemplatesLoaded then
+    LoadTemplates();
+  FTemmplatesDict.TryGetValue(aID, Result);
 end;
 
 function TJsonReportsConfig.ConfigFile() : string;
 begin
   Result := FConfigDir + 'Config.json';
+end;
+
+procedure TJsonReportsConfig.LoadTemplates();
+var
+  lJSONObj : TJSONValue;
+  lEntries : TJSONArray;
+  lEntry : TJSONValue;
+  lValue : string;
+  lTemplate : TReportTemplate;
+begin
+  try
+    if not TFile.Exists(ConfigFile()) then
+      Exit;
+    lValue := TFile.ReadAllText(ConfigFile());
+    lJSONObj := TJSONObject.ParseJSONValue(lValue);
+    try
+      lEntries := lJSONObj.GetValue<TJSONArray>('templates');
+      for lEntry in lEntries do begin
+        lTemplate.ID := lEntry.GetValue<string>('id');
+        lTemplate.Name := lEntry.GetValue<string>('name');
+        lTemplate.ReportClass := lEntry.GetValue<string>('class');
+        lTemplate.Config := lEntry.GetValue<TJSONValue>('config').GetValue<string>('day');
+        FTemmplatesDict.Add(lTemplate.ID, lTemplate);
+      end;
+    finally
+      lJSONObj.Free();
+    end;
+  finally
+    TemplatesLoaded := True;
+  end;
 end;
 
 procedure TJsonReportsConfig.SaveJSONTemplateToFile();
@@ -150,6 +163,8 @@ var
   lJSON : TJSONReportTemplate;
   lTemplate : TReportTemplate;
 begin
+  if not TemplatesLoaded then
+    LoadTemplates();
   FTemmplatesDict.Add(aTemplate.Name, aTemplate);
   FDoc := TJSONObject.Create();
   try

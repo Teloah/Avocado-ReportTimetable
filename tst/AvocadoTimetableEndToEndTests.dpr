@@ -7,7 +7,7 @@ uses
   DUnitX.TestFramework,
   DUnitX.Loggers.Console,
   DUnitX.Windows.Console,
-  EndToEndTests in 'EndToEndTests.pas',
+  EndToEndTests in 'endtoend\EndToEndTests.pas',
   TimetableApp in '..\src\TimetableApp.pas',
   Main in '..\src\gui\Main.pas' {frmMain},
   DUnitX.GUITest in 'DUnitX.GUITest.pas',

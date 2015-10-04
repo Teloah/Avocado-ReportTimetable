@@ -78,7 +78,7 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="EndToEndTests.pas"/>
+        <DCCReference Include="endtoend\EndToEndTests.pas"/>
         <DCCReference Include="..\src\TimetableApp.pas"/>
         <DCCReference Include="..\src\gui\Main.pas">
             <Form>frmMain</Form>

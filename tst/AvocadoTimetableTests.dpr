@@ -7,7 +7,8 @@ uses
   DUnitX.TestFramework,
   DUnitX.Loggers.Console,
   DUnitX.Windows.Console,
-  ReportTemplate in '..\src\model\ReportTemplate.pas';
+  ReportTemplate in '..\src\model\ReportTemplate.pas',
+  ReportTemplateTests in 'unit\ReportTemplateTests.pas';
 
 {$R *.RES}
 

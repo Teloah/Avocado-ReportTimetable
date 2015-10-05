@@ -13,6 +13,8 @@ type
     Config : string;
     constructor Create(const aID : TReportID; const aReportClass, aName, aConfig : string);
     function ToString() : string;
+  private
+    procedure CreateUniqueID();
   end;
 
 implementation
@@ -21,10 +23,21 @@ implementation
 
 constructor TReportTemplate.Create(const aID : TReportID; const aReportClass, aName, aConfig : string);
 begin
-  ID := aID;
+  if aID = '' then
+    CreateUniqueID()
+  else
+    ID := aID;
   ReportClass := aReportClass;
   name := aName;
   Config := aConfig;
+end;
+
+procedure TReportTemplate.CreateUniqueID;
+var
+  lGUID : TGUID;
+begin
+  if CreateGUID(lGUID) = 0 then
+    ID := lGUID.ToString;
 end;
 
 function TReportTemplate.ToString() : string;

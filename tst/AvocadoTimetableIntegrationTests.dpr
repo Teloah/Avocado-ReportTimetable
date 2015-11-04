@@ -4,9 +4,7 @@ program AvocadoTimetableIntegrationTests;
 
 uses
   System.SysUtils,
-  DUnitX.TestFramework,
-  DUnitX.Loggers.Console,
-  DUnitX.Windows.Console,
+  TestInsight.DUnitX,
   JsonReportsConfigTests in 'integration\JsonReportsConfigTests.pas',
   ReportsConfig in '..\src\model\ReportsConfig.pas',
   JsonReportsConfig in '..\src\db\JsonReportsConfig.pas',
@@ -16,19 +14,10 @@ uses
 
 {$R *.RES}
 
-var
-  Runner : ITestRunner;
-  Logger : ITestLogger;
-  Results : IRunResults;
-
 begin
   try
     ReportMemoryLeaksOnShutdown := True;
-    Runner := TDUnitX.CreateRunner();
-    Logger := TDUnitXConsoleLogger.Create(True);
-    Runner.AddLogger(Logger);
-    Results := Runner.Execute();
-    System.Readln;
+    RunRegisteredTests();
   except
     on E : Exception do
       Writeln(E.ClassName, ': ', E.Message);

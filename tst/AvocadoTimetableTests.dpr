@@ -4,27 +4,16 @@ program AvocadoTimetableTests;
 
 uses
   System.SysUtils,
-  DUnitX.TestFramework,
-  DUnitX.Loggers.Console,
-  DUnitX.Windows.Console,
+  TestInsight.DUnitX,
   ReportTemplate in '..\src\model\ReportTemplate.pas',
   ReportTemplateTests in 'unit\ReportTemplateTests.pas';
 
 {$R *.RES}
 
-var
-  Runner : ITestRunner;
-  Logger : ITestLogger;
-  Results : IRunResults;
-
 begin
   try
     ReportMemoryLeaksOnShutdown := True;
-    Runner := TDUnitX.CreateRunner();
-    Logger := TDUnitXConsoleLogger.Create(True);
-    Runner.AddLogger(Logger);
-    Results := Runner.Execute();
-    System.Readln;
+    RunRegisteredTests();
   except
     on E : Exception do
       Writeln(E.ClassName, ': ', E.Message);

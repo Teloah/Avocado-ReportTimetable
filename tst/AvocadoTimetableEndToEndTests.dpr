@@ -4,15 +4,13 @@ program AvocadoTimetableEndToEndTests;
 
 uses
   System.SysUtils,
-  DUnitX.TestFramework,
-  DUnitX.Loggers.Console,
-  DUnitX.Windows.Console,
+  TestInsight.DUnitX,
   EndToEndTests in 'endtoend\EndToEndTests.pas',
   TimetableApp in '..\src\TimetableApp.pas',
-  Main in '..\src\gui\Main.pas' {frmMain},
+  Main in '..\src\gui\Main.pas' {frmMain} ,
   DUnitX.GUITest in 'DUnitX.GUITest.pas',
   ApplicationRunner in 'helpers\ApplicationRunner.pas',
-  NewTemplate in '..\src\gui\NewTemplate.pas' {frmNewTemplate},
+  NewTemplate in '..\src\gui\NewTemplate.pas' {frmNewTemplate} ,
   NewReportFormRunner in 'helpers\NewReportFormRunner.pas',
   ConfigHelper in 'helpers\ConfigHelper.pas',
   Reports in '..\src\model\Reports.pas',
@@ -22,19 +20,10 @@ uses
 
 {$R *.RES}
 
-var
-  Runner : ITestRunner;
-  Logger : ITestLogger;
-  Results : IRunResults;
-
 begin
   try
     ReportMemoryLeaksOnShutdown := True;
-    Runner := TDUnitX.CreateRunner();
-    Logger := TDUnitXConsoleLogger.Create(True);
-    Runner.AddLogger(Logger);
-    Results := Runner.Execute();
-    System.Readln;
+    RunRegisteredTests();
   except
     on E : Exception do
       Writeln(E.ClassName, ': ', E.Message);

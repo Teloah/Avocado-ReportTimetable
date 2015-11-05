@@ -40,6 +40,7 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <DCC_Define>TESTINSIGHT;$(DCC_Define)</DCC_Define>
         <SanitizedProjectName>AvocadoTimetableEndToEndTests</SanitizedProjectName>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <DCC_UsePackage>bindcompfmx;fmx;rtl;dbrtl;IndySystem;DbxClientDriver;bindcomp;inetdb;DBXInterBaseDriver;xmlrtl;DbxCommonDriver;IndyProtocols;DBXMySQLDriver;dbxcds;soaprtl;bindengine;CustomIPTransport;dsnap;fmxase;IndyCore;inet;fmxobj;inetdbxpress;fmxdae;IPIndyImpl;dbexpress;$(DCC_UsePackage)</DCC_UsePackage>
@@ -87,7 +88,6 @@
         <DCCReference Include="helpers\ApplicationRunner.pas"/>
         <DCCReference Include="..\src\gui\NewTemplate.pas">
             <Form>frmNewTemplate</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="helpers\NewReportFormRunner.pas"/>
         <DCCReference Include="helpers\ConfigHelper.pas"/>

@@ -78,6 +78,7 @@ begin
   App.ClickNewReportButton();
   App.AssertNewReportFormIsVisible();
   App.CloseNewReportForm();
+  Assert.Pass();
 end;
 
 procedure TEndToEndTests.ShowsTwoNewReportFormsSimultaneously();
@@ -93,6 +94,7 @@ begin
   App.ClickNewReportButton();
   App.ClickNewReportButton();
   // there should be no memleaks from these lines
+  Assert.Pass();
 end;
 
 function TEndToEndTests.DefaultMonthlyTemplate() : TReportTemplate;

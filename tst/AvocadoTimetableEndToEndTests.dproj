@@ -95,6 +95,7 @@
         <DCCReference Include="..\src\model\ReportsConfig.pas"/>
         <DCCReference Include="..\src\model\ReportTemplate.pas"/>
         <DCCReference Include="..\src\db\JsonReportsConfig.pas"/>
+        <None Include="..\tests.txt"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

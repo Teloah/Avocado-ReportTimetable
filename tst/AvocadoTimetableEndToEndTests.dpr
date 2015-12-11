@@ -7,16 +7,17 @@ uses
   TestInsight.DUnitX,
   EndToEndTests in 'endtoend\EndToEndTests.pas',
   TimetableApp in '..\src\TimetableApp.pas',
-  Main in '..\src\gui\Main.pas' {frmMain} ,
+  Main in '..\src\gui\Main.pas' {frmMain},
   DUnitX.GUITest in 'DUnitX.GUITest.pas',
   ApplicationRunner in 'helpers\ApplicationRunner.pas',
-  NewTemplate in '..\src\gui\NewTemplate.pas' {frmNewTemplate} ,
+  NewTemplate in '..\src\gui\NewTemplate.pas' {frmNewTemplate},
   NewReportFormRunner in 'helpers\NewReportFormRunner.pas',
   ConfigHelper in 'helpers\ConfigHelper.pas',
   Reports in '..\src\model\Reports.pas',
   ReportsConfig in '..\src\model\ReportsConfig.pas',
   ReportTemplate in '..\src\model\ReportTemplate.pas',
-  JsonReportsConfig in '..\src\db\JsonReportsConfig.pas';
+  JsonReportsConfig in '..\src\db\JsonReportsConfig.pas',
+  VCLTimetableApp in '..\src\gui\VCLTimetableApp.pas';
 
 {$R *.RES}
 

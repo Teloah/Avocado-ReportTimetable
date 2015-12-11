@@ -9,7 +9,8 @@ uses
   NewTemplate in 'gui\NewTemplate.pas' {frmNewTemplate},
   AddReport in 'gui\AddReport.pas' {frmAddReport},
   JsonReportsConfig in 'db\JsonReportsConfig.pas',
-  ReportTemplate in 'model\ReportTemplate.pas';
+  ReportTemplate in 'model\ReportTemplate.pas',
+  VCLTimetableApp in 'gui\VCLTimetableApp.pas';
 
 {$R *.res}
 

@@ -19,7 +19,6 @@ type
     FForms : TObjectList<TForm>;
     FConfig : IReportsConfig;
   public
-    { Public declarations }
   end;
 
 var
@@ -29,6 +28,9 @@ implementation
 
 uses
   NewTemplate, JsonReportsConfig;
+
+const
+  TIMETABLE_DIR = '\Avocado\Timetable';
 
 {$R *.dfm}
 
@@ -40,7 +42,7 @@ end;
 procedure TfrmMain.FormCreate(Sender : TObject);
 begin
   FForms := TObjectList<TForm>.Create();
-  FConfig := TJsonReportsConfig.Create(TPath.GetHomePath() + '\Avocado\Timetable');
+  FConfig := TJsonReportsConfig.Create(TPath.GetHomePath() + TIMETABLE_DIR);
 end;
 
 procedure TfrmMain.tbtNewTemplateClick(Sender : TObject);

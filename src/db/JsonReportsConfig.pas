@@ -29,6 +29,7 @@ type
     FTemplates : TJSONArray;
     TemplatesLoaded : Boolean;
     function ConfigFile() : string;
+    procedure CreateConfigDirectory();
     procedure LoadTemplates();
     procedure SaveJSONTemplateToFile();
   public
@@ -115,6 +116,11 @@ begin
   Result := FConfigDir + 'Config.json';
 end;
 
+procedure TJsonReportsConfig.CreateConfigDirectory();
+begin
+  TDirectory.CreateDirectory(FConfigDir);
+end;
+
 procedure TJsonReportsConfig.LoadTemplates();
 var
   lJSONObj : TJSONValue;
@@ -149,6 +155,7 @@ procedure TJsonReportsConfig.SaveJSONTemplateToFile();
 var
   lList : TStringList;
 begin
+  CreateConfigDirectory();
   lList := TStringList.Create();
   try
     lList.Add(FDoc.ToString());

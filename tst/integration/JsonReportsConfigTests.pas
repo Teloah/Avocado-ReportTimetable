@@ -13,7 +13,7 @@ type
     Config : IReportsConfig;
     ConfigHelper : IConfigHelper;
     function CreateConfig() : IReportsConfig;
-    procedure RecreateConfigDir();
+    procedure DeleteConfigDir();
   public
     [Setup]
     procedure Setup();
@@ -40,7 +40,7 @@ const
 
 procedure TJsonReportsConfigTests.Setup();
 begin
-  RecreateConfigDir();
+  DeleteConfigDir();
   ConfigHelper := TConfigHelper.Create(CONFIG_NAME);
 end;
 
@@ -49,11 +49,10 @@ begin
   Result := TJsonReportsConfig.Create(CONFIG_DIR);
 end;
 
-procedure TJsonReportsConfigTests.RecreateConfigDir();
+procedure TJsonReportsConfigTests.DeleteConfigDir();
 begin
   if TDirectory.Exists(CONFIG_DIR) then
     TDirectory.Delete(CONFIG_DIR, True);
-  TDirectory.CreateDirectory(CONFIG_DIR);
 end;
 
 procedure TJsonReportsConfigTests.SaveTemplate_OneTemplate_SavesIt();

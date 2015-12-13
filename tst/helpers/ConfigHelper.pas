@@ -10,6 +10,7 @@ type
     ['{E34334E6-E7FF-46A5-B97D-EB06E653A000}']
     procedure ClearConfig();
     procedure AssertContainsTemplate(const aTemplate : TReportTemplate);
+    procedure AddTemplate(const aTemplate : TReportTemplate);
   end;
 
   TConfigHelper = class(TInterfacedObject, IConfigHelper)
@@ -20,9 +21,13 @@ type
     procedure ClearConfig();
     procedure AssertContainsTemplate(const aTemplate : TReportTemplate);
     function JSONMatchesTemplate(JSONTemplate : TJSONValue; const aTemplate : TReportTemplate) : Boolean;
+    procedure AddTemplate(const aTemplate : TReportTemplate);
   end;
 
 implementation
+
+uses
+  JsonReportsConfig;
 
 { TConfigHelper }
 
@@ -36,6 +41,18 @@ procedure TConfigHelper.ClearConfig();
 begin
   if TFile.Exists(FileName) then
     TFile.Delete(FileName);
+end;
+
+procedure TConfigHelper.AddTemplate(const aTemplate : TReportTemplate);
+var
+  lConfig : TJsonReportsConfig;
+begin
+  lConfig := TJsonReportsConfig.Create(ExtractFilePath(FileName));
+  try
+    lConfig.SaveTemplate(aTemplate);
+  finally
+    lConfig.Free();
+  end;
 end;
 
 procedure TConfigHelper.AssertContainsTemplate(const aTemplate : TReportTemplate);

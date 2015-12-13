@@ -13,6 +13,7 @@ type
   public
     constructor Create();
     destructor Destroy(); override;
+    procedure StartGUI();
     procedure AssertNewReportFormIsVisible();
     procedure AssertShowsForm();
     procedure AssertShowsNoEntries();
@@ -39,7 +40,6 @@ constructor TApplicationRunner.Create();
 begin
   inherited;
   App := TTimetableApp.Create();
-  App.Run();
 end;
 
 destructor TApplicationRunner.Destroy();
@@ -47,6 +47,11 @@ begin
   App.Stop();
   Application.ProcessMessages();
   inherited;
+end;
+
+procedure TApplicationRunner.StartGUI();
+begin
+  App.Run();
 end;
 
 procedure TApplicationRunner.AssertNewReportFormIsVisible();

@@ -36,6 +36,8 @@ type
     procedure NewMonthlyReportTemplateGetsAddedToExistingTemplates();
     [Test]
     procedure TemplatesArePersistedBetweenSessions();
+    [Test]
+    procedure SingleReport_ShowsUpAsIncomplete();
   end;
 
 implementation
@@ -43,7 +45,10 @@ implementation
 uses
   NewReportFormRunner;
 
-{ TEndToEndTests }
+const
+  MONTHLY_ID = 'MONTHLY_ID';
+
+  { TEndToEndTests }
 
 constructor TEndToEndTests.Create();
 begin
@@ -69,12 +74,14 @@ end;
 
 procedure TEndToEndTests.ShowsEmptyForm();
 begin
+  App.StartGUI();
   App.AssertShowsForm();
   App.AssertShowsNoEntries();
 end;
 
 procedure TEndToEndTests.ShowsNewReprotForm();
 begin
+  App.StartGUI();
   App.ClickNewReportButton();
   App.AssertNewReportFormIsVisible();
   App.CloseNewReportForm();
@@ -83,6 +90,7 @@ end;
 
 procedure TEndToEndTests.ShowsTwoNewReportFormsSimultaneously();
 begin
+  App.StartGUI();
   App.ClickNewReportButton();
   App.ClickNewReportButton();
   App.AssertTwoNewReportFormsAreVisible();
@@ -91,6 +99,7 @@ end;
 
 procedure TEndToEndTests.CorrectlyClosesSeveralNewReportFormsWhenClosingMainForm();
 begin
+  App.StartGUI();
   App.ClickNewReportButton();
   App.ClickNewReportButton();
   // there should be no memleaks from these lines
@@ -99,7 +108,7 @@ end;
 
 function TEndToEndTests.DefaultMonthlyTemplate() : TReportTemplate;
 begin
-  Result.ID := 'ID';
+  Result.ID := MONTHLY_ID;
   Result.Name := 'MONTHLY REPORT';
   Result.ReportClass := 'MONTHLY';
   Result.Config := '15';
@@ -109,6 +118,7 @@ procedure TEndToEndTests.NewReportFormAllowsToEnterMonthlyReport();
 var
   NewFormRunner : INewReportFormRunner;
 begin
+  App.StartGUI();
   App.ClickNewReportButton();
   NewFormRunner := TNewReportFormRunner.Create();
   NewFormRunner.EnterMonthlyTemplate(DefaultMonthlyTemplate());
@@ -121,6 +131,7 @@ var
   NewFormRunner : INewReportFormRunner;
   lTemplate : TReportTemplate;
 begin
+  App.StartGUI();
   App.ClickNewReportButton();
   NewFormRunner := TNewReportFormRunner.Create();
 
@@ -136,6 +147,7 @@ var
   lTemplate : TReportTemplate;
   lTemplate2 : TReportTemplate;
 begin
+  App.StartGUI();
   App.ClickNewReportButton();
   NewFormRunner := TNewReportFormRunner.Create();
 
@@ -160,6 +172,7 @@ var
   lTemplate : TReportTemplate;
   lTemplate2 : TReportTemplate;
 begin
+  App.StartGUI();
   App.ClickNewReportButton();
   NewFormRunner := TNewReportFormRunner.Create();
 
@@ -168,6 +181,7 @@ begin
 
   App.Free();
   App := TApplicationRunner.Create();
+  App.StartGUI();
 
   App.ClickNewReportButton();
   NewFormRunner := TNewReportFormRunner.Create();
@@ -179,6 +193,14 @@ begin
   NewFormRunner.EnterMonthlyTemplate(lTemplate2);
 
   ConfigHelper.AssertContainsTemplate(lTemplate);
+end;
+
+procedure TEndToEndTests.SingleReport_ShowsUpAsIncomplete();
+begin
+  ConfigHelper.AddTemplate(DefaultMonthlyTemplate());
+  ConfigHelper.AddReport(MONTHLY_ID, 'Company1');
+  App.StartGUI();
+  // App.AssertShowsReportAsIncomplete('REPOERT1', 'Company1');
 end;
 
 initialization

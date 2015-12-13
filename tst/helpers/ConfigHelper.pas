@@ -3,7 +3,8 @@ unit ConfigHelper;
 interface
 
 uses
-  System.Classes, System.SysUtils, System.IOUtils, System.JSON, DUnitX.TestFramework, ReportsConfig, ReportTemplate;
+  System.Classes, System.SysUtils, System.IOUtils, System.JSON, DUnitX.TestFramework, Reports, ReportsConfig,
+  ReportTemplate;
 
 type
   IConfigHelper = interface
@@ -11,6 +12,7 @@ type
     procedure ClearConfig();
     procedure AssertContainsTemplate(const aTemplate : TReportTemplate);
     procedure AddTemplate(const aTemplate : TReportTemplate);
+    procedure AddReport(const aTemplateID : TReportID; const aCompany : string);
   end;
 
   TConfigHelper = class(TInterfacedObject, IConfigHelper)
@@ -22,6 +24,7 @@ type
     procedure AssertContainsTemplate(const aTemplate : TReportTemplate);
     function JSONMatchesTemplate(JSONTemplate : TJSONValue; const aTemplate : TReportTemplate) : Boolean;
     procedure AddTemplate(const aTemplate : TReportTemplate);
+    procedure AddReport(const aTemplateID : TReportID; const aCompany : string);
   end;
 
 implementation
@@ -41,6 +44,11 @@ procedure TConfigHelper.ClearConfig();
 begin
   if TFile.Exists(FileName) then
     TFile.Delete(FileName);
+end;
+
+procedure TConfigHelper.AddReport(const aTemplateID : TReportID; const aCompany : string);
+begin
+  // add a report
 end;
 
 procedure TConfigHelper.AddTemplate(const aTemplate : TReportTemplate);

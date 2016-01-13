@@ -198,7 +198,7 @@ end;
 procedure TEndToEndTests.SingleReport_ShowsUpAsIncomplete();
 begin
   ConfigHelper.AddTemplate(DefaultMonthlyTemplate());
-  ConfigHelper.AddReport(MONTHLY_ID, 'Company1');
+  // ConfigHelper.AddReport(MONTHLY_ID, 'Company1');
   App.StartGUI();
   // App.AssertShowsReportAsIncomplete('REPOERT1', 'Company1');
 end;

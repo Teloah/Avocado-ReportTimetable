@@ -10,7 +10,9 @@ uses
   AddReport in 'gui\AddReport.pas' {frmAddReport},
   JsonReportsConfig in 'db\JsonReportsConfig.pas',
   ReportTemplate in 'model\ReportTemplate.pas',
-  VCLTimetableApp in 'gui\VCLTimetableApp.pas';
+  VCLTimetableApp in 'gui\VCLTimetableApp.pas',
+  MainFormListener in 'gui\MainFormListener.pas',
+  NewTemplateRequestListener in 'gui\NewTemplateRequestListener.pas';
 
 {$R *.res}
 
@@ -19,8 +21,12 @@ var
 
 begin
   ReportMemoryLeaksOnShutdown := True;
-  App := TTimetableApp.Create();
-  App.Run();
-  Application.Run();
+  App := TVCLTimetableApp.Create();
+  try
+    App.Run();
+    Application.Run();
+  finally
+    App.Stop();
+  end;
 
 end.

@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls,
-  Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, ReportsConfig;
+  Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, ReportsConfig, ReportTemplate, NewTemplateRequestListener;
 
 type
   TfrmNewTemplate = class(TForm)
@@ -22,20 +22,24 @@ type
     btnOK : TButton;
     Button1 : TButton;
     Bevel1 : TBevel;
+    procedure FormCreate(Sender : TObject);
     procedure btnOKClick(Sender : TObject);
+    procedure FormClose(Sender : TObject; var Action : TCloseAction);
   private
-    FConfig : IReportsConfig;
+    FListener : INewTemplateRequestListener;
   public
     procedure SaveTemplate();
-    property Config : IReportsConfig read FConfig write FConfig;
+    property Listener : INewTemplateRequestListener read FListener write FListener;
   end;
 
 implementation
 
-uses
-  JsonReportsConfig, ReportTemplate;
-
 {$R *.dfm}
+
+procedure TfrmNewTemplate.FormCreate(Sender : TObject);
+begin
+  FListener := TNullNewTemplateRequestListener.Create();
+end;
 
 procedure TfrmNewTemplate.btnOKClick(Sender : TObject);
 begin
@@ -43,12 +47,17 @@ begin
   Close();
 end;
 
+procedure TfrmNewTemplate.FormClose(Sender : TObject; var Action : TCloseAction);
+begin
+  FListener := nil;
+end;
+
 procedure TfrmNewTemplate.SaveTemplate();
 var
   lTemplate : TReportTemplate;
 begin
   lTemplate := TReportTemplate.Create('ID', 'MONTHLY', edtReportName.Text, edtMonthlyDate.Text);
-  FConfig.SaveTemplate(lTemplate);
+  Listener.AddTemplate(lTemplate);
 end;
 
 end.

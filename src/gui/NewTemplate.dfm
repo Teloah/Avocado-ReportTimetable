@@ -3,124 +3,90 @@ object frmNewTemplate: TfrmNewTemplate
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Jauns '#353'ablons'
-  ClientHeight = 258
-  ClientWidth = 371
+  ClientHeight = 197
+  ClientWidth = 284
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -14
+  Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
-  PixelsPerInch = 120
-  TextHeight = 17
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
   object Bevel1: TBevel
     Left = 0
-    Top = 192
-    Width = 371
-    Height = 66
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Top = 147
+    Width = 284
+    Height = 50
     Align = alBottom
     Shape = bsTopLine
   end
   object lblMonthlyDate: TLabel
-    Left = 216
-    Top = 78
-    Width = 47
-    Height = 17
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Left = 165
+    Top = 60
+    Width = 36
+    Height = 13
     Caption = 'datum'#257
   end
   object Label1: TLabel
-    Left = 42
-    Top = 35
-    Width = 76
-    Height = 17
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Left = 32
+    Top = 27
+    Width = 58
+    Height = 13
     Caption = 'Nosaukums:'
   end
   object Label2: TLabel
-    Left = 216
-    Top = 114
-    Width = 47
-    Height = 17
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Left = 165
+    Top = 87
+    Width = 36
+    Height = 13
     Caption = 'datum'#257
   end
   object edtReportName: TEdit
-    Left = 136
-    Top = 31
-    Width = 196
-    Height = 25
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Left = 104
+    Top = 24
+    Width = 150
+    Height = 21
     TabOrder = 0
     Text = 'edtReportName'
   end
   object rbtMonthly: TRadioButton
-    Left = 52
-    Top = 77
-    Width = 106
-    Height = 22
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Left = 40
+    Top = 59
+    Width = 81
+    Height = 17
     Caption = 'reizi m'#275'nes'#299
     Checked = True
     TabOrder = 1
     TabStop = True
   end
   object edtMonthlyDate: TEdit
-    Left = 174
-    Top = 75
-    Width = 34
-    Height = 25
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Left = 133
+    Top = 57
+    Width = 26
+    Height = 21
     MaxLength = 2
     NumbersOnly = True
     TabOrder = 2
     Text = '15'
   end
   object rbtQuarterly: TRadioButton
-    Left = 52
-    Top = 112
-    Width = 106
-    Height = 23
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Left = 40
+    Top = 86
+    Width = 81
+    Height = 17
     Caption = 'reizi ceturksn'#299
     TabOrder = 3
   end
   object edtQuarterlyDate: TEdit
-    Left = 174
-    Top = 110
-    Width = 34
-    Height = 25
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Left = 133
+    Top = 84
+    Width = 26
+    Height = 21
     Enabled = False
     MaxLength = 2
     NumbersOnly = True
@@ -128,26 +94,18 @@ object frmNewTemplate: TfrmNewTemplate
     Text = '15'
   end
   object rbtYearly: TRadioButton
-    Left = 52
-    Top = 145
-    Width = 106
-    Height = 22
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Left = 40
+    Top = 111
+    Width = 81
+    Height = 17
     Caption = 'reizi gad'#257
     TabOrder = 5
   end
   object edtYearlyDate: TEdit
-    Left = 174
-    Top = 143
-    Width = 34
-    Height = 25
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Left = 133
+    Top = 109
+    Width = 26
+    Height = 21
     Enabled = False
     MaxLength = 2
     NumbersOnly = True
@@ -155,14 +113,10 @@ object frmNewTemplate: TfrmNewTemplate
     Text = '15'
   end
   object cmbMonth: TComboBox
-    Left = 216
-    Top = 143
-    Width = 116
-    Height = 25
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Left = 165
+    Top = 109
+    Width = 89
+    Height = 21
     Style = csDropDownList
     Enabled = False
     ItemIndex = 0
@@ -183,28 +137,20 @@ object frmNewTemplate: TfrmNewTemplate
       'decembr'#299)
   end
   object btnOK: TButton
-    Left = 128
-    Top = 208
-    Width = 98
-    Height = 33
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Left = 98
+    Top = 159
+    Width = 75
+    Height = 25
     Caption = 'OK'
     Default = True
     TabOrder = 8
     OnClick = btnOKClick
   end
   object Button1: TButton
-    Left = 234
-    Top = 208
-    Width = 98
-    Height = 33
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Left = 179
+    Top = 159
+    Width = 75
+    Height = 25
     Cancel = True
     Caption = 'Atcelt'
     TabOrder = 9

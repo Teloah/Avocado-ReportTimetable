@@ -3,8 +3,7 @@ unit ApplicationRunner;
 interface
 
 uses
-  Vcl.Forms, Vcl.StdCtrls, Vcl.ComCtrls, DUnitX.TestFramework, Spring.Collections, DUnitX.GUITest, TimetableApp,
-  VCLTimetableApp;
+  Vcl.Forms, Vcl.StdCtrls, Vcl.ComCtrls, DUnitX.TestFramework, Spring.Collections, DUnitX.GUITest, TimetableApp;
 
 type
   TApplicationRunner = class
@@ -26,7 +25,7 @@ type
 implementation
 
 uses
-  NewReportFormRunner;
+  NewReportFormRunner, VCLTimetableApp;
 
 const
   MAIN_CAPTION = 'Avocado Timetable';
@@ -39,7 +38,7 @@ const
 constructor TApplicationRunner.Create();
 begin
   inherited;
-  App := TTimetableApp.Create();
+  App := TVCLTimetableApp.Create();
 end;
 
 destructor TApplicationRunner.Destroy();

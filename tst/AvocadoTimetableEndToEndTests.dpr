@@ -17,7 +17,9 @@ uses
   ReportsConfig in '..\src\model\ReportsConfig.pas',
   ReportTemplate in '..\src\model\ReportTemplate.pas',
   JsonReportsConfig in '..\src\db\JsonReportsConfig.pas',
-  VCLTimetableApp in '..\src\gui\VCLTimetableApp.pas';
+  VCLTimetableApp in '..\src\gui\VCLTimetableApp.pas',
+  MainFormListener in '..\src\gui\MainFormListener.pas',
+  NewTemplateRequestListener in '..\src\gui\NewTemplateRequestListener.pas';
 
 {$R *.RES}
 

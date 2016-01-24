@@ -2,27 +2,26 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Caption = 'Avocado Timetable'
-  ClientHeight = 636
-  ClientWidth = 951
+  ClientHeight = 486
+  ClientWidth = 727
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -14
+  Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
   OnCreate = FormCreate
-  OnDestroy = FormDestroy
-  PixelsPerInch = 120
-  TextHeight = 17
+  PixelsPerInch = 96
+  TextHeight = 13
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 951
-    Height = 31
+    Width = 727
+    Height = 27
     AutoSize = True
-    ButtonHeight = 31
-    ButtonWidth = 118
+    ButtonHeight = 27
+    ButtonWidth = 97
     Caption = 'ToolBar1'
     List = True
     ShowCaptions = True
@@ -35,7 +34,7 @@ object frmMain: TfrmMain
       OnClick = tbtNewTemplateClick
     end
     object tbtDummy: TToolButton
-      Left = 118
+      Left = 97
       Top = 0
       AutoSize = True
       Caption = 'tbtDummy'
@@ -46,13 +45,9 @@ object frmMain: TfrmMain
   end
   object Memo1: TMemo
     Left = 0
-    Top = 31
-    Width = 951
-    Height = 605
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
+    Top = 27
+    Width = 727
+    Height = 459
     Align = alClient
     Lines.Strings = (
       'No reports found')

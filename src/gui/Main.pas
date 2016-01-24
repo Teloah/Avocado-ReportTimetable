@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls,
-  Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ToolWin, Vcl.StdCtrls, System.IOUtils, Generics.Collections, ReportsConfig;
+  Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ToolWin, Vcl.StdCtrls, MainFormListener;
 
 type
   TfrmMain = class(TForm)
@@ -12,13 +12,13 @@ type
     tbtDummy : TToolButton;
     Memo1 : TMemo;
     tbtNewTemplate : TToolButton;
-    procedure FormDestroy(Sender : TObject);
     procedure FormCreate(Sender : TObject);
     procedure tbtNewTemplateClick(Sender : TObject);
   private
-    FForms : TObjectList<TForm>;
-    FConfig : IReportsConfig;
+    FListener : IMainFormListener;
+    procedure SetListener(const Value : IMainFormListener);
   public
+    property Listener : IMainFormListener read FListener write SetListener;
   end;
 
 var
@@ -26,33 +26,23 @@ var
 
 implementation
 
-uses
-  NewTemplate, JsonReportsConfig;
-
-const
-  TIMETABLE_DIR = '\Avocado\Timetable';
-
 {$R *.dfm}
 
-procedure TfrmMain.FormDestroy(Sender : TObject);
-begin
-  FForms.Free();
-end;
+{ TfrmMain }
 
 procedure TfrmMain.FormCreate(Sender : TObject);
 begin
-  FForms := TObjectList<TForm>.Create();
-  FConfig := TJsonReportsConfig.Create(TPath.GetHomePath() + TIMETABLE_DIR);
+  FListener := TNullMainFormListener.Create();
+end;
+
+procedure TfrmMain.SetListener(const Value : IMainFormListener);
+begin
+  FListener := Value;
 end;
 
 procedure TfrmMain.tbtNewTemplateClick(Sender : TObject);
-var
-  lForm : TfrmNewTemplate;
 begin
-  lForm := TfrmNewTemplate.Create(nil);
-  lForm.Config := FConfig;
-  lForm.Show();
-  FForms.Add(lForm);
+  FListener.NewTemplateClicked();
 end;
 
 end.

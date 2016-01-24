@@ -9,17 +9,13 @@ type
   TReportID = string;
   TCompany = string;
 
-  IReport = interface(IInvokable)
-    ['{91D6E422-F054-46FC-8E1B-C6EFA7CD47BD}']
-  end;
-
-  TReport = class(TInterfacedObject, IReport)
-  public
+  TReport = record
+    ID : TReportID;
+    Company : TCompany;
   end;
 
   TReportEntry = record
   public
-    Company : TCompany;
     Report : TReportID;
     Date : TDate;
     DateCompleted : TDate;

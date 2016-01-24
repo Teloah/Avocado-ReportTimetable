@@ -79,7 +79,7 @@ begin
   Config := CreateConfig();
   lOtherTemplate := Config.LoadTemplate('VSA');
 
-  Assert.AreEqual(lTemplate.ToString, lOtherTemplate.ToString);
+  Assert.AreEqual(lTemplate.ToString(), lOtherTemplate.ToString());
 end;
 
 procedure TJsonReportsConfigTests.LoadTemplate_SeveralTemplates_LoadsSecondOne();
@@ -87,15 +87,15 @@ var
   lTemplate : TReportTemplate;
   lOtherTemplate : TReportTemplate;
 begin
-  lTemplate := TReportTemplate.Create('VSA', 'MONTHLY', 'Valsts Sociâlâ Atskaite', '15');
   Config := CreateConfig();
-  Config.SaveTemplate(TReportTemplate.Create('DUMMY', 'MONTHLY', 'Pirmâ Atskaite', '1'));
+  Config.SaveTemplate(TReportTemplate.Create('', 'MONTHLY', 'Pirmâ Atskaite', '1'));
+  lTemplate := TReportTemplate.Create('VSA', 'MONTHLY', 'Valsts Sociâlâ Atskaite', '15');
   Config.SaveTemplate(lTemplate);
 
   Config := CreateConfig();
   lOtherTemplate := Config.LoadTemplate('VSA');
 
-  Assert.AreEqual(lTemplate.ToString, lOtherTemplate.ToString);
+  Assert.AreEqual(lTemplate.ToString(), lOtherTemplate.ToString());
 end;
 
 procedure TJsonReportsConfigTests.LoadTemplate_TemplateFromAnotherSession_LoadsTemplate();
@@ -108,10 +108,10 @@ begin
   Config.SaveTemplate(lTemplate);
 
   Config := CreateConfig();
-  Config.SaveTemplate(TReportTemplate.Create('DUMMY', 'MONTHLY', 'Pirmâ Atskaite', '1'));
+  Config.SaveTemplate(TReportTemplate.Create('', 'MONTHLY', 'Pirmâ Atskaite', '1'));
   lOtherTemplate := Config.LoadTemplate('VSA');
 
-  Assert.AreEqual(lTemplate.ToString, lOtherTemplate.ToString);
+  Assert.AreEqual(lTemplate.ToString(), lOtherTemplate.ToString());
 end;
 
 initialization

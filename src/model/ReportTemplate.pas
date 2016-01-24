@@ -32,12 +32,12 @@ begin
   Config := aConfig;
 end;
 
-procedure TReportTemplate.CreateUniqueID;
+procedure TReportTemplate.CreateUniqueID();
 var
   lGUID : TGUID;
 begin
   if CreateGUID(lGUID) = 0 then
-    ID := lGUID.ToString;
+    ID := lGUID.ToString();
 end;
 
 function TReportTemplate.ToString() : string;

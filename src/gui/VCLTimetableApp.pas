@@ -14,7 +14,6 @@ type
     procedure CleanupForms();
   public
     constructor Create();
-    destructor Destroy(); override;
     procedure Run();
     procedure Stop();
     procedure NewTemplateClicked();
@@ -41,12 +40,6 @@ constructor TVCLTimetableApp.Create();
 begin
   inherited;
   FForms := TObjectList<TForm>.Create();
-end;
-
-destructor TVCLTimetableApp.Destroy();
-begin
-  CleanupForms();
-  inherited;
 end;
 
 procedure TVCLTimetableApp.AddTemplate(const aTemplate : TReportTemplate);

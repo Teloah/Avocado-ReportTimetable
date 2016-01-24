@@ -39,3 +39,8 @@ Quarterly report
 
 Add template
   Add a new template from the GUI
+
+Cannot add the same template for the same company twice
+  Combo? in the GUI does not offer this company?
+
+Rename company? Should we show the old name?

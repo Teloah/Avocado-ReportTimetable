@@ -58,3 +58,6 @@ __history/
 
 # test executables
 tst/Win32
+
+# code coverage reports
+coverage_reports

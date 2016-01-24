@@ -12,7 +12,7 @@ type
     procedure ClearConfig();
     procedure AssertContainsTemplate(const aTemplate : TReportTemplate);
     procedure AddTemplate(const aTemplate : TReportTemplate);
-    procedure AddReport(const aTemplateID : TReportID; const aCompany : string);
+    procedure AddReport(const aTemplateID : TReportID; const aCompany : TCompany);
   end;
 
   TConfigHelper = class(TInterfacedObject, IConfigHelper)
@@ -24,7 +24,7 @@ type
     procedure AssertContainsTemplate(const aTemplate : TReportTemplate);
     function JSONMatchesTemplate(JSONTemplate : TJSONValue; const aTemplate : TReportTemplate) : Boolean;
     procedure AddTemplate(const aTemplate : TReportTemplate);
-    procedure AddReport(const aTemplateID : TReportID; const aCompany : string);
+    procedure AddReport(const aTemplateID : TReportID; const aCompany : TCompany);
   end;
 
 implementation
@@ -46,9 +46,10 @@ begin
     TFile.Delete(FileName);
 end;
 
-procedure TConfigHelper.AddReport(const aTemplateID : TReportID; const aCompany : string);
+procedure TConfigHelper.AddReport(const aTemplateID : TReportID; const aCompany : TCompany);
 begin
-  // add a report
+  TFile.WriteAllText(ExtractFilePath(FileName) + '\reports.json', //
+    '{"reports": [{"id": "TEST", "template":"VSA", "company": "Company1"}]}');
 end;
 
 procedure TConfigHelper.AddTemplate(const aTemplate : TReportTemplate);

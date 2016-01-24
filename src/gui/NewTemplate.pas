@@ -56,7 +56,7 @@ procedure TfrmNewTemplate.SaveTemplate();
 var
   lTemplate : TReportTemplate;
 begin
-  lTemplate := TReportTemplate.Create('ID', 'MONTHLY', edtReportName.Text, edtMonthlyDate.Text);
+  lTemplate := TReportTemplate.Create('', 'MONTHLY', edtReportName.Text, edtMonthlyDate.Text);
   Listener.AddTemplate(lTemplate);
 end;
 

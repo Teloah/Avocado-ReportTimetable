@@ -47,6 +47,7 @@ uses
 
 const
   MONTHLY_ID = 'MONTHLY_ID';
+  MONTHLY_NAME = 'Monthly Report';
 
   { TEndToEndTests }
 
@@ -109,7 +110,7 @@ end;
 function TEndToEndTests.DefaultMonthlyTemplate() : TReportTemplate;
 begin
   Result.ID := MONTHLY_ID;
-  Result.Name := 'MONTHLY REPORT';
+  Result.Name := MONTHLY_NAME;
   Result.ReportClass := 'MONTHLY';
   Result.Config := '15';
 end;
@@ -157,10 +158,7 @@ begin
   App.ClickNewReportButton();
   NewFormRunner := TNewReportFormRunner.Create();
 
-  lTemplate2.ID := 'ID2';
-  lTemplate2.Name := 'Other monthly report';
-  lTemplate2.ReportClass := 'MONTHLY';
-  lTemplate2.Config := '1';
+  lTemplate2 := TReportTemplate.Create('', 'MONTHLY', 'Other monthly report', '1');
   NewFormRunner.EnterMonthlyTemplate(lTemplate2);
 
   ConfigHelper.AssertContainsTemplate(lTemplate);
@@ -186,21 +184,24 @@ begin
   App.ClickNewReportButton();
   NewFormRunner := TNewReportFormRunner.Create();
 
-  lTemplate2.ID := 'ID2';
-  lTemplate2.Name := 'Other monthly report';
-  lTemplate2.ReportClass := 'MONTHLY';
-  lTemplate2.Config := '1';
+  lTemplate2 := TReportTemplate.Create('', 'MONTHLY', 'Other monthly report', '1');
   NewFormRunner.EnterMonthlyTemplate(lTemplate2);
 
   ConfigHelper.AssertContainsTemplate(lTemplate);
 end;
 
 procedure TEndToEndTests.SingleReport_ShowsUpAsIncomplete();
+const
+  COMPANY = 'Company';
+
+  // what I need to do this:
+  // * Template: "{"class":"MONTHLY","id":"MONTHLY_ID","name":"Monthly Report","config":{"day":15}}"
+  // * Report: "{"template":"MONTHLY_ID","id":"123456","company":"Company1"}"
 begin
   ConfigHelper.AddTemplate(DefaultMonthlyTemplate());
-  // ConfigHelper.AddReport(MONTHLY_ID, 'Company1');
+  ConfigHelper.AddReport(MONTHLY_ID, COMPANY);
   App.StartGUI();
-  // App.AssertShowsReportAsIncomplete('REPOERT1', 'Company1');
+  App.AssertShowsReportAsIncomplete(MONTHLY_NAME, COMPANY);
 end;
 
 initialization

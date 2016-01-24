@@ -20,6 +20,7 @@ type
     procedure ClickNewReportButton();
     procedure CloseAllNewReportForms();
     procedure CloseNewReportForm();
+    procedure AssertShowsReportAsIncomplete(const aReportName : string; const aCompany : string);
   end;
 
 implementation
@@ -76,6 +77,14 @@ begin
   lForm := FindForm(MAIN_FORM_CLASS);
   lMemo := FindControl(lForm, MEMO_NAME) as TMemo;
   Assert.AreEqual('No reports found'#13#10, lMemo.Text);
+end;
+
+procedure TApplicationRunner.AssertShowsReportAsIncomplete(const aReportName, aCompany : string);
+var
+  lForm : TForm;
+begin
+  lForm := FindForm(MAIN_FORM_CLASS);
+
 end;
 
 procedure TApplicationRunner.AssertTwoNewReportFormsAreVisible();

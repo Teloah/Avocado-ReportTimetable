@@ -1,6 +1,7 @@
 {
-  "reports": [
+  "templates": [
     {
+      "id": "{A42AF75D-BAF2-4C97-8C6B-A3A685AAE16A}",
       "class": "MONTHLY",
       "name": "VSA",
       "config": {
@@ -8,6 +9,7 @@
       }
     },
     {
+      "id": "{B42AF75D-BAF2-4C97-8C6B-A3A685AAE16A}",
       "class": "QUARTERLY",
       "name": "DRN",
       "config": {
@@ -15,20 +17,31 @@
       }
     },
     {
+      "id": "{C42AF75D-BAF2-4C97-8C6B-A3A685AAE16A}",
       "class": "YEARLY",
       "name": "GP",
       "config": {
         "date": 30,
         "month": 4
-    },
-    {
-      "class": "ONCE",
-      "name": "Travel report",
-      "config": {
-        "date": 18,
-        "month": 7,
-        "year": 2015
       }
+    }
+  ],
+  "reports": [
+    {
+      "id": "{D42AF75D-BAF2-4C97-8C6B-A3A685AAE16D}",
+      "template": "{A42AF75D-BAF2-4C97-8C6B-A3A685AAE16A}",
+      "company": "TestCompany",
+      "start_date": "2015-04-23",
+      "end_date": "2017-01-25"
+    }
+  ],
+  "history": [
+    {
+      "report": "{D42AF75D-BAF2-4C97-8C6B-A3A685AAE16D}",
+      "date": "2016-01-15",
+      "date_completed": "2016-01-13",
+      "notes": "Still waiting for documents",
+      "completed": true
     }
   ]
 }

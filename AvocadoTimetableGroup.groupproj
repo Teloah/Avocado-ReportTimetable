@@ -15,6 +15,9 @@
         <Projects Include="tst\AvocadoTimetableEndToEndTests.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="tst\CompleteTestSuite.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -59,14 +62,23 @@
     <Target Name="AvocadoTimetableEndToEndTests:Make">
         <MSBuild Projects="tst\AvocadoTimetableEndToEndTests.dproj" Targets="Make"/>
     </Target>
+    <Target Name="CompleteTestSuite">
+        <MSBuild Projects="tst\CompleteTestSuite.dproj"/>
+    </Target>
+    <Target Name="CompleteTestSuite:Clean">
+        <MSBuild Projects="tst\CompleteTestSuite.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CompleteTestSuite:Make">
+        <MSBuild Projects="tst\CompleteTestSuite.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="AvocadoTimetable;AvocadoTimetableTests;AvocadoTimetableIntegrationTests;AvocadoTimetableEndToEndTests"/>
+        <CallTarget Targets="AvocadoTimetable;AvocadoTimetableTests;AvocadoTimetableIntegrationTests;AvocadoTimetableEndToEndTests;CompleteTestSuite"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AvocadoTimetable:Clean;AvocadoTimetableTests:Clean;AvocadoTimetableIntegrationTests:Clean;AvocadoTimetableEndToEndTests:Clean"/>
+        <CallTarget Targets="AvocadoTimetable:Clean;AvocadoTimetableTests:Clean;AvocadoTimetableIntegrationTests:Clean;AvocadoTimetableEndToEndTests:Clean;CompleteTestSuite:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AvocadoTimetable:Make;AvocadoTimetableTests:Make;AvocadoTimetableIntegrationTests:Make;AvocadoTimetableEndToEndTests:Make"/>
+        <CallTarget Targets="AvocadoTimetable:Make;AvocadoTimetableTests:Make;AvocadoTimetableIntegrationTests:Make;AvocadoTimetableEndToEndTests:Make;CompleteTestSuite:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

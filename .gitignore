@@ -61,3 +61,6 @@ tst/Win32
 
 # code coverage reports
 coverage_reports
+
+# FixInsight settings file
+*.ficfg

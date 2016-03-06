@@ -40,6 +40,10 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>1062</VerInfo_Locale>
+        <DCC_UnitSearchPath>$(DUNITX);$(SPRING4D)\Source\Base;$(SPRING4D)\Source\Base\Collections;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <SanitizedProjectName>AvocadoTimetableEndToEndTests</SanitizedProjectName>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <DCC_UsePackage>bindcompfmx;fmx;rtl;dbrtl;IndySystem;DbxClientDriver;bindcomp;inetdb;DBXInterBaseDriver;xmlrtl;DbxCommonDriver;IndyProtocols;DBXMySQLDriver;dbxcds;soaprtl;bindengine;CustomIPTransport;dsnap;fmxase;IndyCore;inet;fmxobj;inetdbxpress;fmxdae;IPIndyImpl;dbexpress;$(DCC_UsePackage)</DCC_UsePackage>
@@ -66,6 +70,7 @@
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <DCC_UnitSearchPath>$(VIRTUALTREE)\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>None</Manifest_File>
         <DCC_MapFile>3</DCC_MapFile>
@@ -100,6 +105,7 @@
         <DCCReference Include="..\src\gui\VCLTimetableApp.pas"/>
         <DCCReference Include="..\src\gui\MainFormListener.pas"/>
         <DCCReference Include="..\src\gui\NewTemplateRequestListener.pas"/>
+        <DCCReference Include="..\src\gui\AvocadoToolbar.pas"/>
         <None Include="..\tests.txt"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

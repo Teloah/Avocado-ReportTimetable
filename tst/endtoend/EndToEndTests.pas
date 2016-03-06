@@ -194,7 +194,7 @@ procedure TEndToEndTests.SingleReport_ShowsUpAsIncomplete();
 const
   COMPANY = 'Company';
 
-  // what I need to do this:
+  // what I need to do is this:
   // * Template: "{"class":"MONTHLY","id":"MONTHLY_ID","name":"Monthly Report","config":{"day":15}}"
   // * Report: "{"template":"MONTHLY_ID","id":"123456","company":"Company1"}"
 begin

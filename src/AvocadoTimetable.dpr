@@ -12,7 +12,8 @@ uses
   ReportTemplate in 'model\ReportTemplate.pas',
   VCLTimetableApp in 'gui\VCLTimetableApp.pas',
   MainFormListener in 'gui\MainFormListener.pas',
-  NewTemplateRequestListener in 'gui\NewTemplateRequestListener.pas';
+  NewTemplateRequestListener in 'gui\NewTemplateRequestListener.pas',
+  AvocadoToolbar in 'gui\AvocadoToolbar.pas';
 
 {$R *.res}
 

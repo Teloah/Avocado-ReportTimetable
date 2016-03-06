@@ -71,7 +71,7 @@
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <Icon_MainIcon>avocado.ico</Icon_MainIcon>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <DCC_UnitSearchPath>D:\Develop\_delphi\virtual-treeview-read-only\Source;$(SPRING4D)\Source\Base;$(SPRING4D)\Source\Base\Collections;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>$(SPRING4D)\Source\Base;$(SPRING4D)\Source\Base\Collections;$(VIRTUALTREE)\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
     </PropertyGroup>
@@ -105,6 +105,7 @@
         <DCCReference Include="gui\VCLTimetableApp.pas"/>
         <DCCReference Include="gui\MainFormListener.pas"/>
         <DCCReference Include="gui\NewTemplateRequestListener.pas"/>
+        <DCCReference Include="gui\AvocadoToolbar.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

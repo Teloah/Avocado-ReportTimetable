@@ -26,13 +26,13 @@ type
 implementation
 
 uses
-  NewReportFormRunner, VCLTimetableApp;
+  NewReportFormRunner, VCLTimetableApp, VirtualTrees, AvocadoToolbar;
 
 const
   MAIN_CAPTION = 'Avocado Timetable';
   MAIN_FORM_CLASS = 'TfrmMain';
-  MEMO_NAME = 'Memo1';
-  NEW_REPORT_NAME = 'tbtNewTemplate';
+  REPORTS_TREE_NAME = 'vstReports';
+  NEW_REPORT_NAME = 'tbtTemplates';
 
   { TApplicationRunner }
 
@@ -72,11 +72,11 @@ end;
 procedure TApplicationRunner.AssertShowsNoEntries();
 var
   lForm : TCustomForm;
-  lMemo : TMemo;
+  lTree : TVirtualStringTree;
 begin
   lForm := FindForm(MAIN_FORM_CLASS);
-  lMemo := FindControl(lForm, MEMO_NAME) as TMemo;
-  Assert.AreEqual('No reports found'#13#10, lMemo.Text);
+  lTree := FindControl(lForm, REPORTS_TREE_NAME) as TVirtualStringTree;
+  Assert.AreEqual(0, lTree.RootNodeCount);
 end;
 
 procedure TApplicationRunner.AssertShowsReportAsIncomplete(const aReportName, aCompany : string);
@@ -84,7 +84,7 @@ var
   lForm : TForm;
 begin
   lForm := FindForm(MAIN_FORM_CLASS);
-
+  // TODO: add checking
 end;
 
 procedure TApplicationRunner.AssertTwoNewReportFormsAreVisible();
@@ -98,10 +98,10 @@ end;
 procedure TApplicationRunner.ClickNewReportButton();
 var
   lForm : TForm;
-  lButton : TToolButton;
+  lButton : TAvocadoToolButton;
 begin
   lForm := FindForm(MAIN_FORM_CLASS);
-  lButton := FindControl(lForm, NEW_REPORT_NAME) as TToolButton;
+  lButton := FindControl(lForm, NEW_REPORT_NAME) as TAvocadoToolButton;
   lButton.Click();
   Application.ProcessMessages();
 end;

@@ -2,8 +2,8 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Caption = 'Avocado Timetable'
-  ClientHeight = 486
-  ClientWidth = 727
+  ClientHeight = 629
+  ClientWidth = 868
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,43 +14,22 @@ object frmMain: TfrmMain
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object ToolBar1: TToolBar
+  object vstReports: TVirtualStringTree
     Left = 0
     Top = 0
-    Width = 727
-    Height = 27
-    AutoSize = True
-    ButtonHeight = 27
-    ButtonWidth = 97
-    Caption = 'ToolBar1'
-    List = True
-    ShowCaptions = True
-    TabOrder = 0
-    object tbtNewTemplate: TToolButton
-      Left = 0
-      Top = 0
-      Caption = 'tbtNewTemplate'
-      ImageIndex = 3
-      OnClick = tbtNewTemplateClick
-    end
-    object tbtDummy: TToolButton
-      Left = 97
-      Top = 0
-      AutoSize = True
-      Caption = 'tbtDummy'
-      ImageIndex = 2
-      Style = tbsDropDown
-      Visible = False
-    end
-  end
-  object Memo1: TMemo
-    Left = 0
-    Top = 27
-    Width = 727
-    Height = 459
+    Width = 868
+    Height = 629
     Align = alClient
-    Lines.Strings = (
-      'No reports found')
-    TabOrder = 1
+    Header.AutoSizeIndex = 0
+    Header.Font.Charset = DEFAULT_CHARSET
+    Header.Font.Color = clWindowText
+    Header.Font.Height = -11
+    Header.Font.Name = 'Tahoma'
+    Header.Font.Style = []
+    Header.MainColumn = -1
+    TabOrder = 0
+    ExplicitTop = 77
+    ExplicitHeight = 510
+    Columns = <>
   end
 end

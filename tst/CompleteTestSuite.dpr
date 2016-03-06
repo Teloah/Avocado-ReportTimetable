@@ -22,7 +22,8 @@ uses
   Reports in '..\src\model\Reports.pas',
   ReportsConfig in '..\src\model\ReportsConfig.pas',
   ReportTemplate in '..\src\model\ReportTemplate.pas',
-  TimetableApp in '..\src\TimetableApp.pas';
+  TimetableApp in '..\src\TimetableApp.pas',
+  AvocadoToolbar in '..\src\gui\AvocadoToolbar.pas';
 
 begin
   try

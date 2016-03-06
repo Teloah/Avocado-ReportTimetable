@@ -19,7 +19,8 @@ uses
   JsonReportsConfig in '..\src\db\JsonReportsConfig.pas',
   VCLTimetableApp in '..\src\gui\VCLTimetableApp.pas',
   MainFormListener in '..\src\gui\MainFormListener.pas',
-  NewTemplateRequestListener in '..\src\gui\NewTemplateRequestListener.pas';
+  NewTemplateRequestListener in '..\src\gui\NewTemplateRequestListener.pas',
+  AvocadoToolbar in '..\src\gui\AvocadoToolbar.pas';
 
 {$R *.RES}
 

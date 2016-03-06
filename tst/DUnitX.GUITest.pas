@@ -27,6 +27,8 @@ begin
       Exit(lComp as TControl)
     else
       Result := DoFind(lComp, aName);
+    if Assigned(Result) then
+      Exit;
   end;
 end;
 

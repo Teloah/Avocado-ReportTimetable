@@ -106,6 +106,7 @@
         <DCCReference Include="..\src\gui\MainFormListener.pas"/>
         <DCCReference Include="..\src\gui\NewTemplateRequestListener.pas"/>
         <DCCReference Include="..\src\gui\AvocadoToolbar.pas"/>
+        <DCCReference Include="..\src\gui\AvocadoReportsTree.pas"/>
         <None Include="..\tests.txt"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

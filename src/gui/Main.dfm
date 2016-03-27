@@ -14,22 +14,4 @@ object frmMain: TfrmMain
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object vstReports: TVirtualStringTree
-    Left = 0
-    Top = 0
-    Width = 868
-    Height = 629
-    Align = alClient
-    Header.AutoSizeIndex = 0
-    Header.Font.Charset = DEFAULT_CHARSET
-    Header.Font.Color = clWindowText
-    Header.Font.Height = -11
-    Header.Font.Name = 'Tahoma'
-    Header.Font.Style = []
-    Header.MainColumn = -1
-    TabOrder = 0
-    ExplicitTop = 77
-    ExplicitHeight = 510
-    Columns = <>
-  end
 end

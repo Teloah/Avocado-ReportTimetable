@@ -13,7 +13,8 @@ uses
   VCLTimetableApp in 'gui\VCLTimetableApp.pas',
   MainFormListener in 'gui\MainFormListener.pas',
   NewTemplateRequestListener in 'gui\NewTemplateRequestListener.pas',
-  AvocadoToolbar in 'gui\AvocadoToolbar.pas';
+  AvocadoToolbar in 'gui\AvocadoToolbar.pas',
+  AvocadoReportsTree in 'gui\AvocadoReportsTree.pas';
 
 {$R *.res}
 

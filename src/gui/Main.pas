@@ -5,14 +5,14 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls,
   Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ToolWin, Vcl.StdCtrls, Vcl.ExtCtrls, MainFormListener, VirtualTrees,
-  Vcl.Imaging.jpeg;
+  Vcl.Imaging.jpeg, AvocadoReportsTree;
 
 type
   TfrmMain = class(TForm)
-    vstReports : TVirtualStringTree;
     procedure FormCreate(Sender : TObject);
   private
     FListener : IMainFormListener;
+    ReportsTree : TAvocadoReportsTree;
     procedure SetListener(const Value : IMainFormListener);
     procedure NewTemplateClick(Sender : TObject);
   public
@@ -57,6 +57,11 @@ begin
   lToolbar.AddButton('tbtDelete', 'Dzçst', nil);
   lToolbar.Align := alBottom;
   lToolbar.Height := 42;
+
+  ReportsTree := TAvocadoReportsTree.Create(Self);
+  ReportsTree.Name := 'artReports';
+  ReportsTree.Align := alClient;
+  ReportsTree.Parent := Self;
 end;
 
 procedure TfrmMain.SetListener(const Value : IMainFormListener);

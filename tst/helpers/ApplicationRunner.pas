@@ -3,12 +3,15 @@ unit ApplicationRunner;
 interface
 
 uses
-  Vcl.Forms, Vcl.StdCtrls, Vcl.ComCtrls, DUnitX.TestFramework, Spring.Collections, DUnitX.GUITest, TimetableApp;
+  Vcl.Forms, Vcl.StdCtrls, Vcl.ComCtrls, DUnitX.TestFramework, Spring.Collections, DUnitX.GUITest, TimetableApp,
+  AvocadoReportsTree;
 
 type
   TApplicationRunner = class
   private
     App : ITimetableApp;
+    function GetMainForm() : TForm;
+    function GetReportsTree(aForm : TForm) : TAvocadoReportsTree;
   public
     constructor Create();
     destructor Destroy(); override;
@@ -31,7 +34,7 @@ uses
 const
   MAIN_CAPTION = 'Avocado Timetable';
   MAIN_FORM_CLASS = 'TfrmMain';
-  REPORTS_TREE_NAME = 'vstReports';
+  REPORTS_TREE_NAME = 'artReports';
   NEW_REPORT_NAME = 'tbtTemplates';
 
   { TApplicationRunner }
@@ -63,7 +66,7 @@ procedure TApplicationRunner.AssertShowsForm();
 var
   lForm : TForm;
 begin
-  lForm := FindForm(MAIN_FORM_CLASS);
+  lForm := GetMainForm();
 
   Assert.IsTrue(Assigned(lForm));
   Assert.AreEqual(MAIN_CAPTION, lForm.Caption);
@@ -71,20 +74,28 @@ end;
 
 procedure TApplicationRunner.AssertShowsNoEntries();
 var
-  lForm : TCustomForm;
+  lForm : TForm;
   lTree : TVirtualStringTree;
 begin
-  lForm := FindForm(MAIN_FORM_CLASS);
-  lTree := FindControl(lForm, REPORTS_TREE_NAME) as TVirtualStringTree;
+  lForm := GetMainForm();
+  lTree := GetReportsTree(lForm);
   Assert.AreEqual(0, lTree.RootNodeCount);
 end;
 
 procedure TApplicationRunner.AssertShowsReportAsIncomplete(const aReportName, aCompany : string);
 var
   lForm : TForm;
+  lTree : TAvocadoReportsTree;
+  lReportEntry : IReportTreeEntry;
 begin
-  lForm := FindForm(MAIN_FORM_CLASS);
-  // TODO: add checking
+  lForm := GetMainForm();
+  lTree := GetReportsTree(lForm);
+
+  lReportEntry := lTree.GetEntry(0);
+
+  Assert.AreEqual(aReportName, lReportEntry.ReportName());
+  Assert.AreEqual(aCompany, lReportEntry.Company());
+  Assert.AreEqual(False, lReportEntry.IsCompleted());
 end;
 
 procedure TApplicationRunner.AssertTwoNewReportFormsAreVisible();
@@ -100,7 +111,7 @@ var
   lForm : TForm;
   lButton : TAvocadoToolButton;
 begin
-  lForm := FindForm(MAIN_FORM_CLASS);
+  lForm := GetMainForm();
   lButton := FindControl(lForm, NEW_REPORT_NAME) as TAvocadoToolButton;
   lButton.Click();
   Application.ProcessMessages();
@@ -123,6 +134,16 @@ var
 begin
   lForm := FindForm(NEW_REPORT_FORM_CLASS);
   lForm.Close();
+end;
+
+function TApplicationRunner.GetMainForm() : TForm;
+begin
+  Result := FindForm(MAIN_FORM_CLASS);
+end;
+
+function TApplicationRunner.GetReportsTree(aForm : TForm) : TAvocadoReportsTree;
+begin
+  Result := FindControl(aForm, REPORTS_TREE_NAME) as TAvocadoReportsTree;
 end;
 
 end.

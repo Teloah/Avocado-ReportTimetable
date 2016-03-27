@@ -20,7 +20,8 @@ uses
   VCLTimetableApp in '..\src\gui\VCLTimetableApp.pas',
   MainFormListener in '..\src\gui\MainFormListener.pas',
   NewTemplateRequestListener in '..\src\gui\NewTemplateRequestListener.pas',
-  AvocadoToolbar in '..\src\gui\AvocadoToolbar.pas';
+  AvocadoToolbar in '..\src\gui\AvocadoToolbar.pas',
+  AvocadoReportsTree in '..\src\gui\AvocadoReportsTree.pas';
 
 {$R *.RES}
 

@@ -40,6 +40,7 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <DCC_Define>TESTINSIGHT;$(DCC_Define)</DCC_Define>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1062</VerInfo_Locale>
         <DCC_UnitSearchPath>$(DUNITX);$(SPRING4D)\Source\Base;$(SPRING4D)\Source\Base\Collections;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>

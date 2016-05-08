@@ -3,13 +3,14 @@ unit ApplicationRunner;
 interface
 
 uses
-  Vcl.Forms, Vcl.StdCtrls, Vcl.ComCtrls, DUnitX.TestFramework, Spring.Collections, DUnitX.GUITest, TimetableApp,
-  AvocadoReportsTree;
+  Winapi.Windows, Winapi.Messages, Vcl.Forms, Vcl.StdCtrls, Vcl.ComCtrls, Winapi.ShellAPI, DUnitX.TestFramework,
+  Spring.Collections, DUnitX.GUITest, TimetableApp, AvocadoReportsTree;
 
 type
   TApplicationRunner = class
   private
-    App : ITimetableApp;
+    App : HINST;
+    MainWindow : HWND;
     function GetMainForm() : TForm;
     function GetReportsTree(aForm : TForm) : TAvocadoReportsTree;
   public
@@ -42,19 +43,21 @@ const
 constructor TApplicationRunner.Create();
 begin
   inherited;
-  App := TVCLTimetableApp.Create();
+  // App := TVCLTimetableApp.Create();
 end;
 
 destructor TApplicationRunner.Destroy();
 begin
-  App.Stop();
+  SendMessage(MainWindow, WM_CLOSE, 0, 0);
   Application.ProcessMessages();
   inherited;
 end;
 
 procedure TApplicationRunner.StartGUI();
 begin
-  App.Run();
+  App := ShellExecute(0, 'open', 'D:\Develop\Delphi\Avocado-ReportTimetable\src\Win32\Debug\AvocadoTimetable.exe', nil,
+    nil, SW_SHOWNORMAL);
+  MainWindow := FindWindowsForm(MAIN_FORM_CLASS);
 end;
 
 procedure TApplicationRunner.AssertNewReportFormIsVisible();
@@ -63,13 +66,9 @@ begin
 end;
 
 procedure TApplicationRunner.AssertShowsForm();
-var
-  lForm : TForm;
 begin
-  lForm := GetMainForm();
-
-  Assert.IsTrue(Assigned(lForm));
-  Assert.AreEqual(MAIN_CAPTION, lForm.Caption);
+  Assert.AreNotEqual(Cardinal(0), Cardinal(MainWindow));
+  Assert.AreEqual(MAIN_CAPTION, GetWindowText(MainWindow));
 end;
 
 procedure TApplicationRunner.AssertShowsNoEntries();

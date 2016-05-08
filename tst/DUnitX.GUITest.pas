@@ -3,7 +3,7 @@ unit DUnitX.GUITest;
 interface
 
 uses
-  System.Classes, System.SysUtils, Vcl.Forms, Vcl.Controls, Spring.Collections;
+  Winapi.Windows, Winapi.Messages, System.Classes, System.SysUtils, Vcl.Forms, Vcl.Controls, Spring.Collections;
 
 type
   EFormNotFound = class(Exception);
@@ -12,6 +12,9 @@ type
 function FindControl(aParent : TControl; const aName : string) : TControl;
 function FindForm(const aClassName : string) : TForm;
 function FindAllForms(const aClassName : string) : ICollection<TForm>;
+
+function FindWindowsForm(const aClassName : string) : HWND;
+function GetWindowText(aWindow : HWND) : string;
 
 implementation
 
@@ -67,6 +70,28 @@ begin
     if lForm.ClassName = aClassName then
       Result.Add(lForm);
   end;
+end;
+
+function FindWindowsForm(const aClassName : string) : HWND;
+var
+  lStart : Cardinal;
+begin
+  Result := 0;
+  lStart := GetTickCount();
+  while (GetTickCount() - lStart) < 5000 do begin
+    Result := FindWindow(PWideChar(aClassName), 0);
+    if Result <> 0 then
+      Exit;
+    Sleep(1);
+  end;
+end;
+
+function GetWindowText(aWindow : HWND) : string;
+var
+  lText : array [0 .. 32768] of Char;
+begin
+  SendMessage(aWindow, WM_GETTEXT, 32768, LongInt(@lText));
+  Result := lText;
 end;
 
 end.

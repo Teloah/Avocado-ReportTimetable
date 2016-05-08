@@ -77,7 +77,7 @@ procedure TEndToEndTests.ShowsEmptyForm();
 begin
   App.StartGUI();
   App.AssertShowsForm();
-  App.AssertShowsNoEntries();
+  // App.AssertShowsNoEntries();
 end;
 
 procedure TEndToEndTests.ShowsNewReprotForm();
@@ -193,7 +193,6 @@ end;
 procedure TEndToEndTests.SingleReport_ShowsUpAsIncomplete();
 const
   COMPANY = 'Company';
-
   // what I need to do is this:
   // * Template: "{"class":"MONTHLY","id":"MONTHLY_ID","name":"Monthly Report","config":{"day":15}}"
   // * Report: "{"template":"MONTHLY_ID","id":"123456","company":"Company1"}"

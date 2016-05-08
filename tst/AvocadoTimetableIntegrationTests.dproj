@@ -44,7 +44,6 @@
         <VerInfo_Locale>1062</VerInfo_Locale>
         <DCC_UnitSearchPath>$(DUNITX);$(SPRING4D)\Source\Base;$(SPRING4D)\Source\Base\Collections;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <DCC_Define>TESTINSIGHT;$(DCC_Define)</DCC_Define>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <SanitizedProjectName>AvocadoTimetableIntegrationTests</SanitizedProjectName>
         <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>

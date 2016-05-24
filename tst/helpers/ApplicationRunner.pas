@@ -3,8 +3,8 @@ unit ApplicationRunner;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, Vcl.Forms, Vcl.StdCtrls, Vcl.ComCtrls, Winapi.ShellAPI, DUnitX.TestFramework,
-  Spring.Collections, DUnitX.GUITest, TimetableApp, AvocadoReportsTree;
+  Winapi.Windows, Winapi.Messages, System.IOUtils, Vcl.Forms, Vcl.StdCtrls, Vcl.ComCtrls, Winapi.ShellAPI,
+  DUnitX.TestFramework, Spring.Collections, DUnitX.GUITest, TimetableApp, AvocadoReportsTree;
 
 type
   TApplicationRunner = class
@@ -54,9 +54,12 @@ begin
 end;
 
 procedure TApplicationRunner.StartGUI();
+var
+  lPath : string;
 begin
-  App := ShellExecute(0, 'open', 'D:\Develop\Delphi\Avocado-ReportTimetable\src\Win32\Debug\AvocadoTimetable.exe', nil,
-    nil, SW_SHOWNORMAL);
+  lPath := TPath.GetDirectoryName(Application.ExeName) + '\..\..\..\src\Win32\Debug\AvocadoTimetable.exe';
+  // OutputDebugString(PWideChar(lPath));
+  App := ShellExecute(0, 'open', PWideChar(lPath), nil, nil, SW_SHOWNORMAL);
   MainWindow := FindWindowsForm(MAIN_FORM_CLASS);
 end;
 

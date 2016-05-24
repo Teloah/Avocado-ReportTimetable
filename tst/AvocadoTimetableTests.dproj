@@ -42,7 +42,7 @@
     <PropertyGroup Condition="'$(Base)'!=''">
         <SanitizedProjectName>AvocadoTimetableTests</SanitizedProjectName>
         <DCC_UsePackage>bindcompfmx;fmx;rtl;dbrtl;IndySystem;DbxClientDriver;bindcomp;inetdb;DBXInterBaseDriver;xmlrtl;DbxCommonDriver;IndyProtocols;DBXMySQLDriver;dbxcds;soaprtl;bindengine;CustomIPTransport;dsnap;fmxase;IndyCore;inet;fmxobj;inetdbxpress;fmxdae;IPIndyImpl;dbexpress;$(DCC_UsePackage)</DCC_UsePackage>
-        <DCC_UnitSearchPath>$(DUNITX);..\src;..\src\model;$(SPRING4D)\Source\Base;$(SPRING4D)\Source\Base\Collections;$(DELPHIMOCKS);$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>$(DUNITX);..\src;..\src\model;$(SPRING4D)\Source\Base;$(SPRING4D)\Source\Base\Collections;$(DELPHIMOCKS);$(INDY)\Core;$(INDY)\Inc;$(INDY)\Protocols;$(INDY)\System;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1062</VerInfo_Locale>
